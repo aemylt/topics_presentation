@@ -34,11 +34,13 @@
 
 \setlength{\parskip}{1em}
 
+\mathchardef\mhyphen="2D
+
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Complexity theory]{An introduction to complexity theory} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Complexity theory]{QECDT Topics Presentation: Complexity theory} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author{Dominic Moylett} % Your name
 \institute[University of Bristol] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
@@ -84,14 +86,14 @@ How do we measure difficulty?
 \frametitle{What is complexity theory?}
 Complexity theory is the study of how difficult it is to solve a {\color{red} problem} with a computer.
 
-What do we mean when we talk about a problem?
+What is a problem?
 \end{frame}
 
 \begin{frame}
 \frametitle{What is complexity theory?}
 Complexity theory is the study of how difficult it is to solve a problem with a {\color{red} computer}.
 
-What do we mean when we talk about a computer?
+What is a computer?
 \end{frame}
 
 \begin{frame}
@@ -123,7 +125,7 @@ What do we mean when we talk about a computer?
 \begin{frame}
 \frametitle{End of part one}
 \begin{center}
-\includegraphics[scale=0.3]{ag_comic}\footnote{\url{http://abstrusegoose.com/206}}
+\includegraphics{turing_comic}\footnote{\url{http://www.cs.utah.edu/~draperg/cartoons/2005/turing.html}}
 \end{center}
 \end{frame}
 
@@ -157,9 +159,9 @@ Arguably first proposed by G\"{o}del in a letter to von Neumann in 1956.\footnot
 
 First stated formally by Cook in 1971.\footnote{\url{http://dl.acm.org/citation.cfm?coll=GUIDE&dl=GUIDE&id=805047}}
 
-Solving the problem will earn you a million dollars, courtesy of the Clay Institute.\footnote{\url{http://www.claymath.org/millennium-problems}}
+Solving the problem will earn you a million dollars, courtesy of the Clay Mathematics Institute.\footnote{\url{http://www.claymath.org/millennium-problems/p-vs-np-problem}}
 
-Aaronson has called it the most important Millenium Problem, as the answer could make the other problems significantly easier or harder to solve.\footnote{\url{http://www.thenakedscientists.com/HTML/interviews/interview/1001376/}}
+Aaronson has called it the most important Millennium Problem, as the answer could make the other problems significantly easier or harder to solve.\footnote{\url{http://www.thenakedscientists.com/HTML/interviews/interview/1001376/}}
 \end{frame}
 
 \begin{frame}
@@ -169,7 +171,7 @@ Recall that any $TM$ is by definition non-deterministic.
 
 Likewise, any polynomial-time $TM$ is also non-deterministic.
 
-So $\forall L \in P, L \in NP$. Hence $P \subseteq NP$.
+Hence $P \subseteq NP$.
 \end{frame}
 
 \begin{frame}
@@ -195,7 +197,7 @@ $V$ verifies $L$ in polynomial time. Hence $P \subseteq NP$.
 \begin{frame}
 \frametitle{The harder side: Is $NP \subseteq P$}
 
-Another way to think of this problem is: {\em If a problem can be easily verified, can it be easily solved?}
+Another way to think of this problem: {\em If a problem can be easily verified, can it be easily solved?}
 \end{frame}
 
 \begin{frame}
@@ -219,7 +221,7 @@ But how can we determine the hardest problems in $NP$?
 \begin{itemize}
     \item Putting it all together! {\em $P, NP$}
     \item ...only to get another (very difficult) problem. {\em Are easy to verify problems easy to solve?}
-    \item How might we try to solve this new problem? {\em $NP-Complete$ problems}
+    \item How might we try to solve this new problem? {\em $NP\mhyphen Complete$ problems}
 \end{itemize}
 \end{frame}
 
@@ -242,29 +244,31 @@ What if we answered these differently?
 \frametitle{What is a computer?}
 Probabilistic Turing Machines: $BPP, RP$
 
-Quantum computers:  $EQP, BQP$
+Parallel Computing: $NC$
 
 Talking to another, more powerful computer: $MA, IP$
+
+Quantum computers:  $EQP, BQP$
 
 Time travel: $P_{CTC}$
 \end{frame}
 
 \begin{frame}
 \frametitle{What is a problem?}
-Computational problems: $NP-Hard$
+Computational problems: $NP\mhyphen Hard$
 
 Counting problems: $\#P$
 
-Complementary problems: $co-NP$
+Complementary problems: $co\mhyphen NP$
 \end{frame}
 
 \begin{frame}
 \frametitle{How do we measure difficulty?}
 Exponential time: $EXP$
 
-Space complexity: $PSPACE, EXPSPACE$
-
 Linear time: $LIN$
+
+Space complexity: $PSPACE, EXPSPACE$
 
 Sublinear working space: $L$
 \end{frame}
