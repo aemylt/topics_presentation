@@ -200,6 +200,32 @@ When we reach a point that $\delta(q, T_h)$ undefined, the machine has {\em halt
 \end{frame}
 
 \begin{frame}
+\frametitle{What can we store in a machine's memory?}
+\begin{itemize}
+	\item<1-> Integers
+	\item<2-> Rational numbers
+	\item<3-> Floating point numbers
+	\item<4-> Boolean (True/False) statements
+	\item<5-> Text
+	\item<6-> Other machines
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Universal Turing Machines}
+Turing showed in his PhD thesis that we could represent the current state of any $TM$ -- including current state, tape and position of tape head -- as an integer.
+
+Not only that, but we could manipulate this integer such that it matched performing the next step of the computation.
+
+This gave way to Universal Turing Machines; machines capable of running any $TM$ given to them.
+\end{frame}
+
+\begin{frame}
+\frametitle{The Church-Turing Thesis}
+\centerline{``[A]ll effectively calculable sequences are computable'', {\em Turing}}
+\end{frame}
+
+\begin{frame}
 \frametitle{Quiz Time!}
 
 \begin{center}
@@ -316,41 +342,72 @@ Question: Does $M(01)$ {\bf accept} or {\bf reject}?
 
 $q_0$ is the start state, and $q_2$ is the accept state.
 
-Answer: $M(01)$ {\bf reject}s!
+Answer: $M(w)$ doesn't halt. This can be interpreted as rejection, depending on how the problem is phrased.
 \end{frame}
 
 \begin{frame}
-\frametitle{But wait, that last one didn't halt!}
-Sometimes it is possible for a $TM$ to never halt on certain inputs.
+\frametitle{The halting problem}
+You might think it would be useful if we could tell when a machine was going to halt.
 
-In these cases, the machine rejects the input.
+Formally, we would want a $TM\, H$, such that given $M \in TM \text{ and } w \in \Sigma_M^*$:
 
-A related topic that comes from the idea of never terminating machines is {\bf computability theory}. Computability theory looks at if problems can or cannot be solved by a computer, regardless of difficulty.
-
-For the rest of this presentation, we will focus on machines that terminate on all inputs unless stated.
-\end{frame}
-
-\begin{frame}
-\frametitle{What can we store in a machine's memory?}
 \begin{itemize}
-	\item Integers
-	\item Text
-	\item Other machines
+	\item $H(M, w)$ halts in the {\bf accept} state if $M(w)$ halts and
+	\item $H(M, w)$ halts in the {\bf reject} state if $M(w)$ does not halt.
+\end{itemize}
+
+Sadly, Turing proved that such a machine is impossible.
+
+There are many other unsolvable problems as well, within the area of {\bf computability theory}. We will not cover this area, but some reading on the subject is suggested at the end.
+\end{frame}
+
+\begin{frame}
+\frametitle{Nondeterminism: Spot the difference!}
+A Nondeterministic Turing Machine $(NTM)$ is specified as a tuple of seven components $\langle Q, \Gamma, b, \Sigma, q_0, F, \delta \rangle$:
+
+\begin{itemize}
+	\item $Q$ is the set of all possible states
+	\item $\Gamma$ is tape alphabet
+	\item $b \in \Gamma$ is the blank symbol for the tape
+	\item $\Sigma = \Gamma/b$ is the input alphabet for the tape
+	\item $q_0 \in Q$ is the start state
+	\item $F \subseteq Q$ is the set of accepting states
+	\item $\delta: Q \times \Gamma \to (Q \times \Sigma \times \{L, R\})^*$ is the transition function
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Universal Turing Machines}
-Turing showed in his PhD thesis that we could represent the current state of any TM -- including current state, tape and position of tape head -- as an integer.
+\frametitle{What, what's the difference?}
+$NTM$s are different because of the transition function.
 
-Not only that, but we could manipulate this integer such that it matched performing the next step of the computation.
+In deterministic $TMs$, the transition goes from one machine setup to another.
 
-He then designed a Universal Turing Machine; a Turing Machine capable of running any other Turing Machine.
+In $NTM$s, the transition function goes from one to many setups.
+
+These setups are run simultaneously, and the machine accepts if one setup halts in an accepting state, or rejects if all setups halt in the rejecting state.
 \end{frame}
 
 \begin{frame}
-\frametitle{The Church-Turing Thesis}
-\centerline{``[A]ll effectively calculable sequences are computable'', {\em Turing}}
+\frametitle{Computation Tree}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Power of Nondeterminism}
+Note that a $TM$s only transition from one machine setup to another, while $NTM$s transition from one to many.
+
+From this, we can conclude that any $TM$ is by definition also an $NTM$.
+
+Question: Do $NTM$s violate the Church-Turing Thesis? Or put another way, is there any problem that can be solved by an $NTM$ that cannot be solved by a $TM$?
+\end{frame}
+
+\begin{frame}
+\frametitle{Using $TM$s to simulate $NTM$s}
+Recall the computation tree:
+
+We can use a technique called Breadth-First Search to search every branch until we find one that halts in an {\bf accept} state.
+
+Note that this does not mean we can simulate NTMs easily...
 \end{frame}
 
 %------------------------------------------------
@@ -406,8 +463,6 @@ Arguably first proposed by G\"{o}del in a letter to von Neumann in 1956.\footnot
 First stated formally by Cook in 1971.\footnote{\url{http://dl.acm.org/citation.cfm?coll=GUIDE&dl=GUIDE&id=805047}}
 
 Solving the problem will earn you a million dollars, courtesy of the Clay Mathematics Institute.\footnote{\url{http://www.claymath.org/millennium-problems/p-vs-np-problem}}
-
-Aaronson has called it the most important Millennium Problem, as the answer could make the other problems significantly easier or harder to solve.\footnote{\url{http://www.thenakedscientists.com/HTML/interviews/interview/1001376/}}
 \end{frame}
 
 \begin{frame}
