@@ -28,6 +28,10 @@
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{algorithm2e}
+\usepackage{tikz}
+
+\usetikzlibrary{automata,positioning,arrows,chains,fit,shapes}
+
 \DontPrintSemicolon
 
 \DeclareGraphicsExtensions{.png}
@@ -67,7 +71,7 @@ University of Bristol \\ % Your institution for the title page
 
 \begin{frame}
 \frametitle{Complexity theory in a nutshell}
-\centerline{``How hard can it be?'', {\em Jeremy Clarkson}}
+\centerline{``How hard can it be?'', {\em Clarkson}}
 \end{frame}
 
 \begin{frame}
@@ -103,6 +107,250 @@ What is a computer?
     \item What is a problem?
     \item How do we measure difficulty?
 \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\section{What is a computer?}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Our model of a computer}
+\begin{tikzpicture}
+\tikzstyle{every path}=[very thick]
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+\tikzstyle{tmhead}=[arrow box,draw,minimum size=.5cm,arrow box
+arrows={east:.25cm, west:0.25cm}]
+
+%% Draw TM tape
+\begin{scope}[start chain=1 going right,node distance=-0.15mm]
+    \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1,tmtape] {};
+    \node [on chain=1,tmtape] (input) {b};
+    \node [on chain=1,tmtape] {b};
+    \node [on chain=1,tmtape] {a};
+    \node [on chain=1,tmtape] {a};
+    \node [on chain=1,tmtape] {a};
+    \node [on chain=1,tmtape] {a};
+    \node [on chain=1,tmtape] {};
+    \node [on chain=1,tmtape,draw=none] {$\ldots$};
+    \node [on chain=1] {Machine Tape (RAM) with head at letter b};
+\end{scope}
+
+%% Draw TM Finite Control
+\begin{scope}
+[shift={(3cm,-3cm)},start chain=circle placed {at=(-\tikzchaincount*60:1.5)}]
+\foreach \i in {q_0,q_1,q_2,q_3,\ddots,q_n}
+	\node [on chain] {$\i$};
+
+% Arrow to current state
+\node (center) {};
+\draw[->] (center) -- (circle-2);
+
+\node[rounded corners,draw=black,thick,fit=(circle-1) (circle-2) (circle-3) 
+      (circle-4) (circle-5) (circle-6),
+			label=right:Set of States (CPU) with current state $q_0$] (fsbox)
+		{};
+\end{scope}
+
+%% Draw TM head below (input) tape cell
+\node [tmhead,yshift=-.3cm] at (input.south) (head) {$q_1$};
+
+\end{tikzpicture}\footnote{Original version at \url{http://www.texample.net/tikz/examples/turing-machine-2/}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Formal definition of a computer}
+A Turing Machine $(TM)$ is specified as a tuple of seven components $\langle Q, \Gamma, b, \Sigma, q_0, F, \delta \rangle$:
+
+\begin{itemize}
+	\item $Q$ is the set of all possible states
+	\item $\Gamma$ is tape alphabet
+	\item $b \in \Gamma$ is the blank symbol for the tape
+	\item $\Sigma = \Gamma/b$ is the input alphabet for the tape
+	\item $q_0 \in Q$ is the start state
+	\item $F \subseteq Q$ is the set of accepting states
+	\item $\delta: Q \times \Gamma \to Q \times \Sigma \times \{L, R\}$ is the transition function
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{But how do we run it?}
+The majority of computation time is spent repeating the following loop. Note that $T_h$ is the $h$-th cell of the tape.
+\begin{algorithm}[H]
+$q = q_0$\\
+$h = 0$\\
+$T = w$ \tcp*{Tape starts as just input, followed by blank cells}
+\While{$\delta(q, T_h)$ is not undefined}{
+	$(q, h, i) = \delta(q, T_h)$\\
+	\eIf{$i = L$}{$h = h - 1$ \tcp*{Move tape head to the left}}
+	{$h = h + 1$ \tcp*{Move tape head to the right}}
+}
+\end{algorithm}
+\end{frame}
+
+\begin{frame}
+\frametitle{What happens when it stops?}
+When we reach a point that $\delta(q, T_h)$ undefined, the machine has {\em halted}. What happens next depends on the state the machine stopped in.
+\begin{algorithm}[H]
+\eIf{$q \in F$}{\bf{accept}\\\bf{return} $T$ \tcp*{This is thought of as the output of $M(w)$}}
+{\bf{reject}}
+\end{algorithm}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$1 \to (1, R)$} (q2)
+        (q1) edge [bend left] node {$0 \to (0, R)$} (q0);
+\end{tikzpicture}
+\end{center}
+
+$q_0$ is the start state, and $q_2$ is the accept state.
+
+Question: Does $M(01)$ {\bf accept} or {\bf reject}?
+\end{frame}
+
+\begin{frame}
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$1 \to (1, R)$} (q2)
+        (q1) edge [bend left] node {$0 \to (0, R)$} (q0);
+\end{tikzpicture}
+\end{center}
+
+$q_0$ is the start state, and $q_2$ is the accept state.
+
+Answer: $M(01)$ {\bf accept}s!
+\end{frame}
+
+\begin{frame}
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (q2)
+        (q1) edge [bend left] node {$1 \to (1, R)$} (q0);
+\end{tikzpicture}
+\end{center}
+
+$q_0$ is the start state, and $q_2$ is the accept state.
+
+Question: Does $M(01)$ {\bf accept} or {\bf reject}?
+\end{frame}
+
+\begin{frame}
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (q2)
+        (q1) edge [bend left] node {$1 \to (1, R)$} (q0);
+\end{tikzpicture}
+\end{center}
+
+$q_0$ is the start state, and $q_2$ is the accept state.
+
+Answer: $M(01)$ {\bf reject}s!
+\end{frame}
+
+\begin{frame}
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (q2)
+        (q1) edge [bend left] node {$1 \to (1, L)$} (q0);
+\end{tikzpicture}
+\end{center}
+
+$q_0$ is the start state, and $q_2$ is the accept state.
+
+Question: Does $M(01)$ {\bf accept} or {\bf reject}?
+\end{frame}
+
+\begin{frame}
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (q2)
+        (q1) edge [bend left] node {$1 \to (1, L)$} (q0);
+\end{tikzpicture}
+\end{center}
+
+$q_0$ is the start state, and $q_2$ is the accept state.
+
+Answer: $M(01)$ {\bf reject}s!
+\end{frame}
+
+\begin{frame}
+\frametitle{But wait, that last one didn't halt!}
+Sometimes it is possible for a $TM$ to never halt on certain inputs.
+
+In these cases, the machine rejects the input.
+
+A related topic that comes from the idea of never terminating machines is {\bf computability theory}. Computability theory looks at if problems can or cannot be solved by a computer, regardless of difficulty.
+
+For the rest of this presentation, we will focus on machines that terminate on all inputs unless stated.
+\end{frame}
+
+\begin{frame}
+\frametitle{What can we store in a machine's memory?}
+\begin{itemize}
+	\item Integers
+	\item Text
+	\item Other machines
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Universal Turing Machines}
+Turing showed in his PhD thesis that we could represent the current state of any TM -- including current state, tape and position of tape head -- as an integer.
+
+Not only that, but we could manipulate this integer such that it matched performing the next step of the computation.
+
+He then designed a Universal Turing Machine; a Turing Machine capable of running any other Turing Machine.
+\end{frame}
+
+\begin{frame}
+\frametitle{The Church-Turing Thesis}
+\centerline{``[A]ll effectively calculable sequences are computable'', {\em Turing}}
 \end{frame}
 
 %------------------------------------------------
@@ -147,10 +395,8 @@ What is a computer?
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Exercise Left for the Student}
+\frametitle{Pop quiz!}
 \centerline{Does $P=NP$?}
-
-(NB: You should probably refer to the literature before trying to solve this.)
 \end{frame}
 
 \begin{frame}
