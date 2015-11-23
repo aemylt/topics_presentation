@@ -38,13 +38,11 @@
 
 \setlength{\parskip}{1em}
 
-\mathchardef\mhyphen="2D
-
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Complexity theory]{QECDT Topics Presentation: Complexity theory} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Complexity theory]{Topics in Quantum Engineering Presentation:\\Complexity theory} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author{Dominic Moylett} % Your name
 \institute[University of Bristol] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
@@ -213,7 +211,7 @@ When we reach a point that $\delta(q, T_h)$ undefined, the machine has {\em halt
 
 \begin{frame}
 \frametitle{Universal Turing Machines}
-Turing showed in his PhD thesis that we could represent the current state of any $TM$ -- including current state, tape and position of tape head -- as an integer.
+Turing showed in his PhD thesis that we could represent any $TM$ after any number of transitions -- including current state, tape contents and position of tape head -- as an integer.
 
 Not only that, but we could manipulate this integer such that it matched performing the next step of the computation.
 
@@ -342,7 +340,7 @@ Question: Does $M(01)$ {\bf accept} or {\bf reject}?
 
 $q_0$ is the start state, and $q_2$ is the accept state.
 
-Answer: $M(w)$ doesn't halt. This can be interpreted as rejection, depending on how the problem is phrased.
+Answer: $M(w)$ doesn't halt.
 \end{frame}
 
 \begin{frame}
@@ -411,6 +409,128 @@ Note that this does not mean we can simulate NTMs easily...
 \end{frame}
 
 %------------------------------------------------
+\section{What is a problem?}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Describing problems as {\em languages}}
+A language $L$ is a (potentially infinite) set.
+
+Example languages:
+\begin{itemize}
+	\item Text strings that contain the word "Hello"
+	\item Satisfiable boolean expressions
+	\item Eulerian graphs
+	\item Hamiltonian graphs
+	\item The halting problem
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Decidable languages}
+A language $L$ is {\em decidable} if there exists a machine $M$ such that:
+
+\begin{itemize}
+	\item $\forall w \in L, M(w) \textbf{ accepts}$
+	\item $\forall w \notin L, M(w) \textbf{ rejects}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Verifiable languages}
+A language $L$ is {\em verifiable} if there exists a machine $V$ such that:
+
+\begin{itemize}
+	\item $\forall w \in L, \exists c \text{ s.t. } V(w, c) \textbf{ accepts}$
+	\item $\forall w \notin L, V(w, c) \textbf{ rejects } \forall c$
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\section{How do we measure difficulty?}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Performance of a machine}
+Problem: We want to talk about how much time it takes for a machine to solve a problem.
+
+Solution: Assume $\delta$ takes a constant amount of time to run and count the number of times we call $\delta$.
+
+To remain general, we will focus on how the number of times we call $\delta$ scales as the input becomes larger.
+
+We will focus on how the machine performs on the worst case input.
+\end{frame}
+
+\begin{frame}
+\frametitle{Formal definitions of time complexity}
+Let $\mathrm{TIME}(M, w)$ be the number of times machine $M$ is called on input $w$.
+
+\[T_M(n) = \max_{w \in \Sigma^n}(\mathrm{TIME}(M, w))\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Problem: $T_M(n)$ might be complicated to work out}
+\includegraphics[scale=0.25]{complex_code}\footnote{\url{https://github.com/djmylt/dict_matching/blob/master/dict_matching.h}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solution: Approximate!}
+Let $f$ and $g$ be functions over the real numbers. We say that:
+
+$$f(n) \in O(g(n)) \text{ iff } \exists c > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, f(n) \leq c \cdot g(n)$$
+
+$$f(n) \in \Omega(g(n)) \text{ iff } \exists c > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, f(n) \geq c \cdot g(n)$$
+
+$$f(n) \in \Theta(g(n)) \text{ iff } \exists c_1, c_2 > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n)$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples}
+Prove each of the following statements:
+
+$$n \in O(n^2)$$
+$$2^n \in \Omega(n^2)$$
+$$n \in \Theta(2n)$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples}
+Prove each of the following statements:
+
+$$n \in O(n^2): c = 1, n_0 = 0$$
+$$2^n \in \Omega(n^2)$$
+$$n \in \Theta(2n)$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples}
+Prove each of the following statements:
+
+$$n \in O(n^2): c = 1, n_0 = 0$$
+$$2^n \in \Omega(n^2): c = 1, n_0 = 1$$
+$$n \in \Theta(2n)$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples}
+Prove each of the following statements:
+
+$$n \in O(n^2): c = 1, n_0 = 0$$
+$$2^n \in \Omega(n^2): c = 1, n_0 = 1$$
+$$n \in \Theta(2n): c_1 = 0.5, c_2 = 1, n_0 = 0$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Polynomial Time}
+
+We are particularly interested in machines that scale efficiently as the size of the problem increases.
+
+For this, we are going to focus on polynomial time complexity:
+
+$$\mathrm{POLY}(n) = \bigcup_{k=0}^{\inf} O(n^k)$$
+\end{frame}
+
+%------------------------------------------------
 \section{Summary of part one}
 %------------------------------------------------
 
@@ -448,11 +568,75 @@ Note that this does not mean we can simulate NTMs easily...
 \end{frame}
 
 %------------------------------------------------
+\section{Complexity classes}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Complexity Classes}
+Now that we have provided our definitions for a computer, a problem and performance, we can look at what problems can be solved under these restrictions.
+
+These are called {\em complexity classes}.
+\end{frame}
+
+\begin{frame}
+\frametitle{Deterministic polynomial time}
+A language $L$ can be solved in deterministic polynomial time iff $\exists TM\, M$ such that:
+
+\begin{itemize}
+\item $M$ decides $L$
+\item and $T_M(n) \in \mathrm{POLY}(n)$
+\end{itemize}
+
+We shall refer to the set of these problems as $P$.
+\end{frame}
+
+\begin{frame}
+\frametitle{Non-deterministic polynomial time}
+A language $L$ can be solved in non-deterministic polynomial time iff $\exists NTM\, M$ such that:
+
+\begin{itemize}
+\item $M$ decides $L$
+\item and $T_M(n) \in \mathrm{POLY}(n)$
+\end{itemize}
+
+We shall refer to the set of these problems as $NP$.
+\end{frame}
+
+\begin{frame}
+\frametitle{Deterministic verification}
+Another definition for NP can be written based off of verification:
+
+A language $L$ can be verified in deterministic polynomial time iff $\exists TM\, V$ such that:
+
+\begin{itemize}
+\item $V$ decides $L$
+\item and $T_V(n) \in \mathrm{POLY}(n)$
+\item and $|c| \in O(p(n))$ for some polynomial function $p$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Non-determinism to verification}
+Recall the computation tree for an $NTM$.
+
+We label each branch with some integer.
+
+Our certificate $c$ is now the polynomial length sequence of integers that lead to the accepting state.
+\end{frame}
+
+\begin{frame}
+\frametitle{Verification to non-determinism}
+We use the $NTM$ to brute-force guess the certificate. Since the certificate is polynomial-length this will take a polynomial number of steps.
+
+We run $V(w, c)$ for every possible $c$ and accept if one instance of $V$ accepts. Since $V$ runs in polynomial time, this also takes a polynomial number of steps.
+\end{frame}
+
+%------------------------------------------------
 \section{The $P$ versus $NP$ problem}
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Pop quiz!}
+\frametitle{Exercise Left For the Student}
 \centerline{Does $P=NP$?}
 \end{frame}
 
@@ -514,15 +698,118 @@ But how can we determine the hardest problems in $NP$?
 \end{frame}
 
 %------------------------------------------------
+\section{Completeness}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Polynomial time reducible}
+
+Take two languages $A$ and $B$. We say that $A \leq_p B$ iff $\exists TM\, M$ such that:
+
+\begin{itemize}
+	\item $\forall w \in A, M(w) \in B$
+	\item and $\forall w \notin A, M(w) \notin B$
+	\item and $T_M(n) \in \mathrm{POLY}(n)$
+\end{itemize}
+
+Note that this property is transitive: $A \leq_p B \text{ and } B \leq_p C \to A \leq_p C$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{$NP\text{-Complete}$}
+
+A language $A$ is $NP\text{-Complete}$ iff:
+
+\begin{itemize}
+	\item $A \in NP$
+	\item and $\forall B \in NP, B \leq_p A$
+\end{itemize}
+
+If one $NP\text{-Complete}$ language is proven to be in $P$, then every $NP$ problem is also in $P$.
+\end{frame}
+
+\begin{frame}
+\frametitle{Problem: There are lots of $NP$ problems}
+Solution: Generalise!
+
+We know that any problem in $NP$ can be decided in polynomial time by an $NTM$.
+
+So can we convert an $NTM$ to some other problem?
+\end{frame}
+
+\begin{frame}
+\frametitle{Satisfiable boolean formulae}
+Take a boolean formula $f = a \vee b \wedge \bar{c}$.
+
+We say that $f$ is {\em satisfiable} if we can assign $0$ or $1$ to each variable such that $f = 1$.
+
+Examples:
+\begin{itemize}
+	\item $f$ is satisfiable: $(a = 1, b = 1, c = 0)$
+	\item but $f' = x \wedge \bar{x}$ is not satisfiable
+\end{itemize}
+
+We call $SAT$ the language of all satisfiable boolean formulae.
+\end{frame}
+
+\begin{frame}
+\frametitle{$SAT \in NP$}
+$SAT$ can be verified in polynomial time:
+
+\begin{itemize}
+	\item Make the certificate the values we assign to each variable.
+	\item Have V substitute the value for each variable into the formula.
+	\item {\bf accept} if the formula evaluates to $1$, otherwise {\bf reject}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+$$SAT \in NP\text{-Complete}$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Proving other $NP\text{-Complete}$ problems}
+
+Now that we have one $NP\text{-Complete}$ problem, proving others is a lot easier.
+
+Recall that polynomial-time reducibility is transitive.
+
+So if $A$ is $NP\text{-Complete}$, then $B$ is $NP\text{-Complete}$ if:
+
+\begin{itemize}
+	\item $B \in NP$
+	\item and $A \leq_p B$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Other $NP\text{-Complete}$ problems}
+\begin{itemize}
+	\item<1-> $3SAT$
+	\item<2-> Hamiltonian graphs
+	\item<3-> Cliques
+	\item<4-> Knapsack
+	\item<5-> Longest path
+	\item<6-> Tetris
+	\item<7-> Lemmings
+	\item<8-> Super Mario Bros
+	\item<9-> Bejeweled
+	\item<10-> Candy Crush Saga
+	\item<11-> Flood-It
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
 \section{Summary of part two}
 %------------------------------------------------
 
 \begin{frame}
 \frametitle{Summary of part two}
 \begin{itemize}
-    \item Putting it all together! {\em $P, NP$}
+    \item Putting it all together! {\em Complexity classes, $P, NP$}
     \item ...only to get another (very difficult) problem. {\em Are easy to verify problems easy to solve?}
-    \item How might we try to solve this new problem? {\em $NP\mhyphen Complete$ problems}
+    \item How might we try to solve this new problem? {\em $NP\text{-Complete}$ problems}
 \end{itemize}
 \end{frame}
 
@@ -542,28 +829,6 @@ What if we answered these differently?
 \end{frame}
 
 \begin{frame}
-\frametitle{What is a computer?}
-Probabilistic Turing Machines: $BPP, RP$
-
-Parallel Computing: $NC$
-
-Talking to another, more powerful computer: $MA, IP$
-
-Quantum computers:  $EQP, BQP$
-
-Time travel: $P_{CTC}$
-\end{frame}
-
-\begin{frame}
-\frametitle{What is a problem?}
-Computational problems: $NP\mhyphen Hard$
-
-Counting problems: $\#P$
-
-Complementary problems: $co\mhyphen NP$
-\end{frame}
-
-\begin{frame}
 \frametitle{How do we measure difficulty?}
 Exponential time: $EXP$
 
@@ -575,6 +840,34 @@ Sublinear working space: $L$
 \end{frame}
 
 \begin{frame}
+\frametitle{What is a problem?}
+Computational problems: $NP\text{-Hard}$
+
+Counting problems: $\#P$
+
+Complementary problems: $\text{co-}NP$
+\end{frame}
+
+\begin{frame}
+\frametitle{What is a computer?}
+Probabilistic Turing Machines: $BPP, RP$
+
+Postselection: $\text{Post-}BPP$
+
+Parallel Computing: $NC$
+
+Talking to another, more powerful computer: $MA, IP$
+
+Oracles: $\Delta_iP, \Pi_iP, \Sigma_iP, PH$
+
+Advice: $P/poly, P/log$
+
+Quantum computers:  $EQP, BQP$
+
+Time travel: $P_{CTC}$
+\end{frame}
+
+\begin{frame}
 \frametitle{This is only the beginning}
 There are many more complexity classes out there, and very quickly relating them in a simple equation like this:
 
@@ -583,6 +876,20 @@ $$P \subseteq NP$$
 Becomes this:
 
 $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = IP = P_{CTC} \subseteq EXP \subseteq EXPSPACE$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Open problems in complexity theory}
+\begin{itemize}
+	\item<1-> Does $P = NP$?
+	\item<2-> Does $L = NL$?
+	\item<3-> Does $BPP = P$?
+	\item<4-> Does $BQP = BPP$?
+	\item<5-> Does $NC = P$?
+	\item<6-> Does $P = PSPACE$?
+	\item<7-> Does $NP = \text{co-}NP$?
+	\item<8-> And lots more...
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
@@ -601,6 +908,30 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = IP = P_{C
 \frametitle{The end}
 \includegraphics[scale=0.5]{smbc_comic_votey}\footnote{\url{http://www.smbc-comics.com/?id=3919}}
 \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Suggested books}
+\begin{itemize}
+	\item {\em Quantum Computing Since Democritus} by Scott Aaronson offers a broad overview of many complexity classes
+	\item {\em Introduction to the Theory of Computation} by Michael Sipser is the recommended textbook for most computability and complexity theory courses
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Suggested papers}
+\begin{itemize}
+	\item {\em On Computable Numbers, with an Application to the Entscheidungsproblem} by Alan Turing is Turing's PhD thesis, which provides the original definition of Turing Machines, a formal definition of the Universal Turing Machine, and a proof that the Halting problem is undecidable
+	\item {\em The Complexity of Theorem Proving Procedures} by Stephen Cook provides the proof that $SAT \in NP\text{-Complete}$
+	\item {\em Reducibility Among Combinatorial Problems} by Richard Karp provides 21 $NP\text{-Complete}$ problems
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Suggested websites}
+\begin{itemize}
+	\item \url{https://complexityzoo.uwaterloo.ca/} is a Wiki originally developed by Scott Aaronson, which provides a list of every complexity class ever stated
+\end{itemize}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
