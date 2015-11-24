@@ -42,7 +42,7 @@
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Complexity theory]{Topics in Quantum Engineering Presentation:\\Complexity theory} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Complexity theory]{Topics in Quantum Engineering Presentation:\\Complexity Theory} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author{Dominic Moylett} % Your name
 \institute[University of Bristol] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
@@ -69,7 +69,7 @@ University of Bristol \\ % Your institution for the title page
 
 \begin{frame}
 \frametitle{Complexity theory in a nutshell}
-\centerline{``How hard can it be?'', {\em Clarkson}}
+\centerline{``How hard can it be?'', {\em Clarkson, Hammond and May}}
 \end{frame}
 
 \begin{frame}
@@ -155,20 +155,20 @@ arrows={east:.25cm, west:0.25cm}]
 %% Draw TM head below (input) tape cell
 \node [tmhead,yshift=-.3cm] at (input.south) (head) {$q_1$};
 
-\end{tikzpicture}\footnote{Original version at \url{http://www.texample.net/tikz/examples/turing-machine-2/}}
+\end{tikzpicture}\footnote{\url{http://www.texample.net/tikz/examples/turing-machine-2/}}
 \end{frame}
 
 \begin{frame}
 \frametitle{Formal definition of a computer}
-A Turing Machine $(TM)$ is specified as a tuple of seven components $\langle Q, \Gamma, b, \Sigma, q_0, F, \delta \rangle$:
+A Turing Machine $(TM)$ is specified as a tuple of seven components $(Q, \Sigma, \Gamma, q_0, q_{accept}, q_{reject})$:
 
 \begin{itemize}
 	\item $Q$ is the set of all possible states
-	\item $\Gamma$ is tape alphabet
-	\item $b \in \Gamma$ is the blank symbol for the tape
-	\item $\Sigma = \Gamma/b$ is the input alphabet for the tape
+	\item $\Sigma$ is the input alphabet for the tape. Note that $\Sigma$ cannot contain the blank symbol $\sqcup$
+	\item $\Gamma$ is tape alphabet, where $\Sigma \subseteq \Gamma$ and $\sqcup \in \Gamma$
 	\item $q_0 \in Q$ is the start state
-	\item $F \subseteq Q$ is the set of accepting states
+	\item $q_{accept} \in Q$ is the accept state
+	\item $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
 	\item $\delta: Q \times \Gamma \to Q \times \Sigma \times \{L, R\}$ is the transition function
 \end{itemize}
 \end{frame}
@@ -180,7 +180,7 @@ The majority of computation time is spent repeating the following loop. Note tha
 $q = q_0$\\
 $h = 0$\\
 $T = w$ \tcp*{Tape starts as just input, followed by blank cells}
-\While{$\delta(q, T_h)$ is not undefined}{
+\While{$q \notin \{q_{accept}, q_{reject}\}$}{
 	$(q, h, i) = \delta(q, T_h)$\\
 	\eIf{$i = L$}{$h = h - 1$ \tcp*{Move tape head to the left}}
 	{$h = h + 1$ \tcp*{Move tape head to the right}}
@@ -190,11 +190,11 @@ $T = w$ \tcp*{Tape starts as just input, followed by blank cells}
 
 \begin{frame}
 \frametitle{What happens when it stops?}
-When we reach a point that $\delta(q, T_h)$ undefined, the machine has {\em halted}. What happens next depends on the state the machine stopped in.
-\begin{algorithm}[H]
-\eIf{$q \in F$}{\bf{accept}\\\bf{return} $T$ \tcp*{This is thought of as the output of $M(w)$}}
-{\bf{reject}}
-\end{algorithm}
+When we reach either the {\em accept} or {\em reject} state, the machine has {\em halted}.
+
+If the machine {\em accepted}, then the output of it is the contents of the tape.
+
+If the machine {\em rejected}, then nothing is returned.
 \end{frame}
 
 \begin{frame}
@@ -205,7 +205,8 @@ When we reach a point that $\delta(q, T_h)$ undefined, the machine has {\em halt
 	\item<3-> Floating point numbers
 	\item<4-> Boolean (True/False) statements
 	\item<5-> Text
-	\item<6-> Other machines
+	\item<6-> Graphs
+	\item<7-> Other machines
 \end{itemize}
 \end{frame}
 
@@ -230,17 +231,16 @@ This gave way to Universal Turing Machines; machines capable of running any $TM$
 \begin{tikzpicture}[node distance=3cm,on grid,auto]
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
-    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
         (q0) edge node {$0 \to (0, R)$} (q1)
-        (q1) edge node {$1 \to (1, R)$} (q2)
-        (q1) edge [bend left] node {$0 \to (0, R)$} (q0);
+        (q1) edge node {$1 \to (1, R)$} (qaccept)
+        (q1) edge node {$0 \to (0, R)$} (qreject);
 \end{tikzpicture}
 \end{center}
 
-$q_0$ is the start state, and $q_2$ is the accept state.
-
-Question: Does $M(01)$ {\bf accept} or {\bf reject}?
+Question: Does $M(01)$ accept or reject?
 \end{frame}
 
 \begin{frame}
@@ -250,17 +250,16 @@ Question: Does $M(01)$ {\bf accept} or {\bf reject}?
 \begin{tikzpicture}[node distance=3cm,on grid,auto]
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
-    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
         (q0) edge node {$0 \to (0, R)$} (q1)
-        (q1) edge node {$1 \to (1, R)$} (q2)
-        (q1) edge [bend left] node {$0 \to (0, R)$} (q0);
+        (q1) edge node {$1 \to (1, R)$} (qaccept)
+        (q1) edge node {$0 \to (0, R)$} (qreject);
 \end{tikzpicture}
 \end{center}
 
-$q_0$ is the start state, and $q_2$ is the accept state.
-
-Answer: $M(01)$ {\bf accept}s!
+Answer: $M(01)$ accepts!
 \end{frame}
 
 \begin{frame}
@@ -270,17 +269,16 @@ Answer: $M(01)$ {\bf accept}s!
 \begin{tikzpicture}[node distance=3cm,on grid,auto]
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
-    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
         (q0) edge node {$0 \to (0, R)$} (q1)
-        (q1) edge node {$0 \to (0, R)$} (q2)
-        (q1) edge [bend left] node {$1 \to (1, R)$} (q0);
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q1) edge node {$1 \to (1, R)$} (qreject);
 \end{tikzpicture}
 \end{center}
 
-$q_0$ is the start state, and $q_2$ is the accept state.
-
-Question: Does $M(01)$ {\bf accept} or {\bf reject}?
+Question: Does $M(01)$ accept or reject?
 \end{frame}
 
 \begin{frame}
@@ -290,17 +288,16 @@ Question: Does $M(01)$ {\bf accept} or {\bf reject}?
 \begin{tikzpicture}[node distance=3cm,on grid,auto]
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
-    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
         (q0) edge node {$0 \to (0, R)$} (q1)
-        (q1) edge node {$0 \to (0, R)$} (q2)
-        (q1) edge [bend left] node {$1 \to (1, R)$} (q0);
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q1) edge node {$1 \to (1, R)$} (qreject);
 \end{tikzpicture}
 \end{center}
 
-$q_0$ is the start state, and $q_2$ is the accept state.
-
-Answer: $M(01)$ {\bf reject}s!
+Answer: $M(01)$ rejects!
 \end{frame}
 
 \begin{frame}
@@ -310,17 +307,17 @@ Answer: $M(01)$ {\bf reject}s!
 \begin{tikzpicture}[node distance=3cm,on grid,auto]
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
-    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
         (q0) edge node {$0 \to (0, R)$} (q1)
-        (q1) edge node {$0 \to (0, R)$} (q2)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q1) edge node {$\sqcup \to (1, R)$} (qreject)
         (q1) edge [bend left] node {$1 \to (1, L)$} (q0);
 \end{tikzpicture}
 \end{center}
 
-$q_0$ is the start state, and $q_2$ is the accept state.
-
-Question: Does $M(01)$ {\bf accept} or {\bf reject}?
+Question: Does $M(01)$ accept or reject?
 \end{frame}
 
 \begin{frame}
@@ -330,15 +327,15 @@ Question: Does $M(01)$ {\bf accept} or {\bf reject}?
 \begin{tikzpicture}[node distance=3cm,on grid,auto]
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
-    \node[accepting,state] (q2) [right of=q1] {$q_2$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
         (q0) edge node {$0 \to (0, R)$} (q1)
-        (q1) edge node {$0 \to (0, R)$} (q2)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q1) edge node {$\sqcup \to (1, R)$} (qreject)
         (q1) edge [bend left] node {$1 \to (1, L)$} (q0);
 \end{tikzpicture}
 \end{center}
-
-$q_0$ is the start state, and $q_2$ is the accept state.
 
 Answer: $M(w)$ doesn't halt.
 \end{frame}
@@ -350,8 +347,8 @@ You might think it would be useful if we could tell when a machine was going to 
 Formally, we would want a $TM\, H$, such that given $M \in TM \text{ and } w \in \Sigma_M^*$:
 
 \begin{itemize}
-	\item $H(M, w)$ halts in the {\bf accept} state if $M(w)$ halts and
-	\item $H(M, w)$ halts in the {\bf reject} state if $M(w)$ does not halt.
+	\item $H(M, w)$ halts in the accept state if $M(w)$ halts and
+	\item $H(M, w)$ halts in the reject state if $M(w)$ does not halt.
 \end{itemize}
 
 Sadly, Turing proved that such a machine is impossible.
@@ -361,15 +358,15 @@ There are many other unsolvable problems as well, within the area of {\bf comput
 
 \begin{frame}
 \frametitle{Nondeterminism: Spot the difference!}
-A Nondeterministic Turing Machine $(NTM)$ is specified as a tuple of seven components $\langle Q, \Gamma, b, \Sigma, q_0, F, \delta \rangle$:
+A Nondeterministic Turing Machine $(NTM)$ is specified as a tuple of seven components $(Q, \Sigma, \Gamma, q_0, q_{accept}, q_{reject})$:
 
 \begin{itemize}
 	\item $Q$ is the set of all possible states
-	\item $\Gamma$ is tape alphabet
-	\item $b \in \Gamma$ is the blank symbol for the tape
-	\item $\Sigma = \Gamma/b$ is the input alphabet for the tape
+	\item $\Sigma$ is the input alphabet for the tape. Note that $\Sigma$ cannot contain the blank symbol $\sqcup$
+	\item $\Gamma$ is tape alphabet, where $\Sigma \subseteq \Gamma$ and $\sqcup \in \Gamma$
 	\item $q_0 \in Q$ is the start state
-	\item $F \subseteq Q$ is the set of accepting states
+	\item $q_{accept} \in Q$ is the accept state
+	\item $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
 	\item $\delta: Q \times \Gamma \to (Q \times \Sigma \times \{L, R\})^*$ is the transition function
 \end{itemize}
 \end{frame}
@@ -396,16 +393,23 @@ Note that a $TM$s only transition from one machine setup to another, while $NTM$
 
 From this, we can conclude that any $TM$ is by definition also an $NTM$.
 
-Question: Do $NTM$s violate the Church-Turing Thesis? Or put another way, is there any problem that can be solved by an $NTM$ that cannot be solved by a $TM$?
+Question: Is there any problem that can be solved by an $NTM$ that cannot be solved by a $TM$?
 \end{frame}
 
 \begin{frame}
 \frametitle{Using $TM$s to simulate $NTM$s}
 Recall the computation tree:
 
-We can use a technique called Breadth-First Search to search every branch until we find one that halts in an {\bf accept} state.
+We can use Breadth-First Search to search every branch until we find one that halts in an accept state.
+\end{frame}
 
-Note that this does not mean we can simulate NTMs easily...
+\begin{frame}
+\frametitle{Structure of part one}
+\begin{itemize}
+    \item What is a computer? {\em Deterministic Turing Machine, Nondeterministic Turing Machine}
+    \item What is a problem?
+    \item How do we measure difficulty?
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
@@ -413,16 +417,16 @@ Note that this does not mean we can simulate NTMs easily...
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Describing problems as {\em languages}}
-A language $L$ is a (potentially infinite) set.
+\frametitle{Describing problems as languages}
+A {\em language} $L$ is a (potentially infinite) set.
 
 Example languages:
 \begin{itemize}
-	\item Text strings that contain the word "Hello"
+	\item Text strings that contain the word ``Hello''
 	\item Satisfiable boolean expressions
 	\item Eulerian graphs
 	\item Hamiltonian graphs
-	\item The halting problem
+	\item $(M, w)$ such that $M(w)$ halts
 \end{itemize}
 \end{frame}
 
@@ -441,8 +445,17 @@ A language $L$ is {\em decidable} if there exists a machine $M$ such that:
 A language $L$ is {\em verifiable} if there exists a machine $V$ such that:
 
 \begin{itemize}
-	\item $\forall w \in L, \exists c \text{ s.t. } V(w, c) \textbf{ accepts}$
-	\item $\forall w \notin L, V(w, c) \textbf{ rejects } \forall c$
+	\item $\forall w \in L, \exists c \in \Sigma^* \text{ s.t. } V(w, c) \text{ accepts}$
+	\item $\forall w \notin L, \forall c \in \Sigma^*, V(w, c) \text{ rejects }$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Structure of part one}
+\begin{itemize}
+    \item What is a computer? {\em Deterministic Turing Machine, Nondeterministic Turing Machine}
+    \item What is a problem? {\em Deciding if a word is in a language, verifying that a word is in a language}
+    \item How do we measure difficulty?
 \end{itemize}
 \end{frame}
 
@@ -456,20 +469,13 @@ Problem: We want to talk about how much time it takes for a machine to solve a p
 
 Solution: Assume $\delta$ takes a constant amount of time to run and count the number of times we call $\delta$.
 
-To remain general, we will focus on how the number of times we call $\delta$ scales as the input becomes larger.
+To remain general, we will focus on how the number of times we call $\delta$ scales in the worst case as the input becomes larger.
 
-We will focus on how the machine performs on the worst case input.
+We can represent this time complexity as a function of the size of the input.
 \end{frame}
 
 \begin{frame}
-\frametitle{Formal definitions of time complexity}
-Let $\mathrm{TIME}(M, w)$ be the number of times machine $M$ is called on input $w$.
-
-\[T_M(n) = \max_{w \in \Sigma^n}(\mathrm{TIME}(M, w))\]
-\end{frame}
-
-\begin{frame}
-\frametitle{Problem: $T_M(n)$ might be complicated to work out}
+\frametitle{Problem: Time complexity might be complicated to work out}
 \includegraphics[scale=0.25]{complex_code}\footnote{\url{https://github.com/djmylt/dict_matching/blob/master/dict_matching.h}}
 \end{frame}
 
@@ -521,13 +527,12 @@ $$n \in \Theta(2n): c_1 = 0.5, c_2 = 1, n_0 = 0$$
 \end{frame}
 
 \begin{frame}
-\frametitle{Polynomial Time}
+\frametitle{Time Complexity Classes}
+Let $t: \mathbb{N} \to \mathbb{R}$ be a function.
 
-We are particularly interested in machines that scale efficiently as the size of the problem increases.
+$\mathrm{TIME}(t(n))$ is all the languages that can be decided by a $TM$ in $O(t(n))$ time.
 
-For this, we are going to focus on polynomial time complexity:
-
-$$\mathrm{POLY}(n) = \bigcup_{k=0}^{\inf} O(n^k)$$
+$\mathrm{NTIME}(t(n))$ is all the languages that can be decided by a $NTM$ in $O(t(n))$ time.
 \end{frame}
 
 %------------------------------------------------
@@ -537,7 +542,7 @@ $$\mathrm{POLY}(n) = \bigcup_{k=0}^{\inf} O(n^k)$$
 \begin{frame}
 \frametitle{Summary of part one}
 \begin{itemize}
-    \item What is a computer? {\em Deterministic Turing Machine, Non-Deterministic Turing Machine}
+    \item What is a computer? {\em Deterministic Turing Machine, Nondeterministic Turing Machine}
     \item What is a problem? {\em Deciding if a word is in a language, verifying that a word is in a language}
     \item How do we measure difficulty? {\em Upper bound of time for an input of length $n$}
 \end{itemize}
@@ -580,43 +585,26 @@ These are called {\em complexity classes}.
 
 \begin{frame}
 \frametitle{Deterministic polynomial time}
-A language $L$ can be solved in deterministic polynomial time iff $\exists TM\, M$ such that:
+One example of a complexity class is the set of languages that can be decided by a $TM$ in polynomial time.
 
-\begin{itemize}
-\item $M$ decides $L$
-\item and $T_M(n) \in \mathrm{POLY}(n)$
-\end{itemize}
+$$\bigcup_{k = 0}^{\inf} \mathrm{TIME}(n^k)$$
 
 We shall refer to the set of these problems as $P$.
 \end{frame}
 
 \begin{frame}
-\frametitle{Non-deterministic polynomial time}
-A language $L$ can be solved in non-deterministic polynomial time iff $\exists NTM\, M$ such that:
+\frametitle{Nondeterministic polynomial time}
+One example of a complexity class is the set of languages that can be decided by a $NTM$ in polynomial time.
 
-\begin{itemize}
-\item $M$ decides $L$
-\item and $T_M(n) \in \mathrm{POLY}(n)$
-\end{itemize}
+$$\bigcup_{k = 0}^{\inf} \mathrm{NTIME}(n^k)$$
 
 We shall refer to the set of these problems as $NP$.
+
+We can also define $NP$ as the set of languages that can be verified by a $TM$ in polynomial time.
 \end{frame}
 
 \begin{frame}
-\frametitle{Deterministic verification}
-Another definition for NP can be written based off of verification:
-
-A language $L$ can be verified in deterministic polynomial time iff $\exists TM\, V$ such that:
-
-\begin{itemize}
-\item $V$ decides $L$
-\item and $T_V(n) \in \mathrm{POLY}(n)$
-\item and $|c| \in O(p(n))$ for some polynomial function $p$
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Non-determinism to verification}
+\frametitle{From nondeterminism to verification}
 Recall the computation tree for an $NTM$.
 
 We label each branch with some integer.
@@ -625,10 +613,21 @@ Our certificate $c$ is now the polynomial length sequence of integers that lead 
 \end{frame}
 
 \begin{frame}
-\frametitle{Verification to non-determinism}
-We use the $NTM$ to brute-force guess the certificate. Since the certificate is polynomial-length this will take a polynomial number of steps.
+\frametitle{From verification to nondeterminism}
+Since the verifier runs in polynomial time, the certificate must be polynomial in length.
 
-We run $V(w, c)$ for every possible $c$ and accept if one instance of $V$ accepts. Since $V$ runs in polynomial time, this also takes a polynomial number of steps.
+We use nondeterminism to brute force the certificate.
+
+And then run the verifier on every certificate.
+\end{frame}
+
+\begin{frame}
+\frametitle{Structure of part two}
+\begin{itemize}
+    \item Putting it all together! {\em Complexity classes, $P, NP$}
+    \item ...only to get another (very difficult) problem.
+    \item How might we try to solve this new problem?
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
@@ -644,7 +643,7 @@ We run $V(w, c)$ for every possible $c$ and accept if one instance of $V$ accept
 \frametitle{The $P$ versus $NP$ problem}
 Arguably first proposed by G\"{o}del in a letter to von Neumann in 1956.\footnote{\url{https://ecommons.cornell.edu/bitstream/handle/1813/6910/89-994.pdf}}
 
-First stated formally by Cook in 1971.\footnote{\url{http://dl.acm.org/citation.cfm?coll=GUIDE&dl=GUIDE&id=805047}}
+First stated formally by Cook in 1971.
 
 Solving the problem will earn you a million dollars, courtesy of the Clay Mathematics Institute.\footnote{\url{http://www.claymath.org/millennium-problems/p-vs-np-problem}}
 \end{frame}
@@ -652,9 +651,9 @@ Solving the problem will earn you a million dollars, courtesy of the Clay Mathem
 \begin{frame}
 \frametitle{The easy side: $P \subseteq NP$}
 
-Recall that any $TM$ is by definition non-deterministic.
+Recall that any $TM$ is by definition nondeterministic.
 
-Likewise, any polynomial-time $TM$ is also non-deterministic.
+Likewise, any polynomial-time $TM$ is also nondeterministic.
 
 Hence $P \subseteq NP$.
 \end{frame}
@@ -697,6 +696,15 @@ And if $P \subset NP$, then these are the problems that won't have a polynomial 
 But how can we determine the hardest problems in $NP$?
 \end{frame}
 
+\begin{frame}
+\frametitle{Summary of part two}
+\begin{itemize}
+    \item Putting it all together! {\em Complexity classes, $P, NP$}
+    \item ...only to get another (very difficult) problem. {\em Are easy to verify problems easy to solve?}
+    \item How might we try to solve this new problem?
+\end{itemize}
+\end{frame}
+
 %------------------------------------------------
 \section{Completeness}
 %------------------------------------------------
@@ -708,11 +716,11 @@ Take two languages $A$ and $B$. We say that $A \leq_p B$ iff $\exists TM\, M$ su
 
 \begin{itemize}
 	\item $\forall w \in A, M(w) \in B$
-	\item and $\forall w \notin A, M(w) \notin B$
-	\item and $T_M(n) \in \mathrm{POLY}(n)$
+	\item $\forall w \notin A, M(w) \notin B$
+	\item and $M$ runs in worst-case $O(p(n))$ time for some polynomial $p$, where $n = |w|$
 \end{itemize}
 
-Note that this property is transitive: $A \leq_p B \text{ and } B \leq_p C \to A \leq_p C$
+Note that this property is transitive: $A \leq_p B \text{ and } B \leq_q C \to A \leq_{p + q} C$
 
 \end{frame}
 
@@ -731,8 +739,6 @@ If one $NP\text{-Complete}$ language is proven to be in $P$, then every $NP$ pro
 
 \begin{frame}
 \frametitle{Problem: There are lots of $NP$ problems}
-Solution: Generalise!
-
 We know that any problem in $NP$ can be decided in polynomial time by an $NTM$.
 
 So can we convert an $NTM$ to some other problem?
@@ -759,13 +765,21 @@ $SAT$ can be verified in polynomial time:
 
 \begin{itemize}
 	\item Make the certificate the values we assign to each variable.
-	\item Have V substitute the value for each variable into the formula.
-	\item {\bf accept} if the formula evaluates to $1$, otherwise {\bf reject}.
+	\item Have $V$ substitute the value for each variable into the formula.
+	\item Accept if the formula evaluates to $1$, otherwise reject.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-$$SAT \in NP\text{-Complete}$$
+\frametitle{Cook-Levin Theorem}
+Cook showed that any $NTM\, M$ can be converted to a boolean formula such that:
+
+\begin{itemize}
+	\item If $M$ accepts, then the formula is satisfiable
+	\item and if $M$ rejects, then the formula cannot be satisfied.
+\end{itemize}
+
+As a result, it was proven that $SAT \in NP\text{-Complete}$.
 \end{frame}
 
 \begin{frame}
@@ -775,11 +789,11 @@ Now that we have one $NP\text{-Complete}$ problem, proving others is a lot easie
 
 Recall that polynomial-time reducibility is transitive.
 
-So if $A$ is $NP\text{-Complete}$, then $B$ is $NP\text{-Complete}$ if:
+So we can now provide a recursive definition. $B \in NP\text{-Complete}$ iff:
 
 \begin{itemize}
-	\item $B \in NP$
-	\item and $A \leq_p B$
+	\item $B = SAT$
+	\item or $B \in NP \text{ and } \exists A \in NP\text{-Complete s.t. } A \leq_p B$
 \end{itemize}
 \end{frame}
 
@@ -790,13 +804,12 @@ So if $A$ is $NP\text{-Complete}$, then $B$ is $NP\text{-Complete}$ if:
 	\item<2-> Hamiltonian graphs
 	\item<3-> Cliques
 	\item<4-> Knapsack
-	\item<5-> Longest path
-	\item<6-> Tetris
-	\item<7-> Lemmings
-	\item<8-> Super Mario Bros
-	\item<9-> Bejeweled
-	\item<10-> Candy Crush Saga
-	\item<11-> Flood-It
+	\item<5-> Tetris
+	\item<6-> Lemmings
+	\item<7-> Super Mario Bros
+	\item<8-> Bejeweled
+	\item<9-> Candy Crush Saga
+	\item<10-> Flood-It
 \end{itemize}
 \end{frame}
 
@@ -879,6 +892,76 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = IP = P_{C
 \end{frame}
 
 \begin{frame}
+\begin{tikzpicture}
+\pgftransformscale{.6}
+
+%%% HELP LINES - uncomment to design/extend
+% \draw[step=1cm,gray,very thin] (-10,0) grid (10,12);
+% \node at (0,0) {\textbf{(0,0)}};
+
+%% Horizontal bar
+\draw[very thick] (10,0) -- (-10,0);
+
+% LOG TIME
+\draw (-1,0) parabola bend (0,2) (1,0) ;
+\node at (0,1) {
+	\begin{tabular}{c}
+	L \\ Time
+	\end{tabular}
+};
+
+% LOG SPACE
+\draw (-2,0) parabola bend (0,3.5) (2,0);
+\node at (0,2.5) {
+	\begin{tabular}{c}
+	L
+	\end{tabular}
+};
+
+% PTIME
+\draw (-3,0) parabola bend (0,4.5) (3,0);
+\node at (0,4) {P};
+
+% NP
+\draw[dotted] (-4,0) parabola bend (2,6) (4.5,0);
+\node[rotate=-45] at (3,3.5) {NP};
+
+% NP-complete
+\node[circle,dotted,draw] at (2,5) {NPC};
+
+% Co-NP
+\draw[dashed] (4,0) parabola bend (-2,6) (-4.5,0);
+\node[rotate=45] at (-2.5,4) {co-NP};
+
+% PSPACE
+\draw (-6,0) parabola bend (0,7.2) (6,0);
+\node at (0,6.5) {PSPACE};
+
+% EXPTIME
+\draw (-7,0) parabola bend (0,8.5) (7,0);
+\node at (0,8) {EXP};
+
+% EXPTIME
+\draw (-8,0) parabola bend (0,9.5) (8,0);
+\node at (0,9) {EXPSPACE};
+
+% ELEMENTARY
+\draw (-9,0) parabola bend (0,11.5) (9,0);
+\node at (0,10.5) {$\vdots$};
+\node[anchor=north] at (0,11.4) {
+	\begin{tabular}{c}
+		ELEMENTARY \\
+		2EXP
+	\end{tabular}
+};
+
+% RECURSIVE
+\draw[very thick] (-9.5,0) parabola bend (0,12.5) (9.5,0);
+\node at (0,12) {R};
+\end{tikzpicture}\footnote{\url{http://www.texample.net/tikz/examples/complexity-classes/}}
+\end{frame}
+
+\begin{frame}
 \frametitle{Open problems in complexity theory}
 \begin{itemize}
 	\item<1-> Does $P = NP$?
@@ -923,7 +1006,7 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = IP = P_{C
 \begin{itemize}
 	\item {\em On Computable Numbers, with an Application to the Entscheidungsproblem} by Alan Turing is Turing's PhD thesis, which provides the original definition of Turing Machines, a formal definition of the Universal Turing Machine, and a proof that the Halting problem is undecidable
 	\item {\em The Complexity of Theorem Proving Procedures} by Stephen Cook provides the proof that $SAT \in NP\text{-Complete}$
-	\item {\em Reducibility Among Combinatorial Problems} by Richard Karp provides 21 $NP\text{-Complete}$ problems
+	\item {\em Reducibility Among Combinatorial Problems} by Richard Karp provides 21 of the earliest problems proven to be $NP\text{-Complete}$
 \end{itemize}
 \end{frame}
 
