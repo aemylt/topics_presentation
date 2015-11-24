@@ -192,9 +192,9 @@ $T = w$ \tcp*{Tape starts as just input, followed by blank cells}
 \frametitle{What happens when it stops?}
 When we reach either the {\em accept} or {\em reject} state, the machine has {\em halted}.
 
-If the machine {\em accepted}, then the output of it is the contents of the tape.
+If the machine {\em accepted}, then the machine accepts and the contents of the tape, denoted $M(w)$, is returned.
 
-If the machine {\em rejected}, then nothing is returned.
+If the machine {\em rejected}, then the machine rejects and nothing is returned.
 \end{frame}
 
 \begin{frame}
@@ -243,7 +243,7 @@ This gave way to Universal Turing Machines; machines capable of running any $TM$
 Question: Does $M(01)$ accept or reject?
 \end{frame}
 
-\begin{frame}
+\begin{frame}[noframenumbering]
 \frametitle{Quiz Time!}
 
 \begin{center}
@@ -281,7 +281,7 @@ Answer: $M(01)$ accepts!
 Question: Does $M(01)$ accept or reject?
 \end{frame}
 
-\begin{frame}
+\begin{frame}[noframenumbering]
 \frametitle{Quiz Time!}
 
 \begin{center}
@@ -320,7 +320,7 @@ Answer: $M(01)$ rejects!
 Question: Does $M(01)$ accept or reject?
 \end{frame}
 
-\begin{frame}
+\begin{frame}[noframenumbering]
 \frametitle{Quiz Time!}
 
 \begin{center}
@@ -344,7 +344,7 @@ Answer: $M(w)$ doesn't halt.
 \frametitle{The halting problem}
 You might think it would be useful if we could tell when a machine was going to halt.
 
-Formally, we would want a $TM\, H$, such that given $M \in TM \text{ and } w \in \Sigma_M^*$:
+Formally, we want a $TM\, H$ such that given $M \in TM \text{ and } w \in \Sigma_M^*$:
 
 \begin{itemize}
 	\item $H(M, w)$ halts in the accept state if $M(w)$ halts and
@@ -435,8 +435,8 @@ Example languages:
 A language $L$ is {\em decidable} if there exists a machine $M$ such that:
 
 \begin{itemize}
-	\item $\forall w \in L, M(w) \textbf{ accepts}$
-	\item $\forall w \notin L, M(w) \textbf{ rejects}$
+	\item $\forall w \in L, M(w) \text{ accepts}$
+	\item $\forall w \notin L, M(w) \text{ rejects}$
 \end{itemize}
 \end{frame}
 
@@ -499,7 +499,7 @@ $$2^n \in \Omega(n^2)$$
 $$n \in \Theta(2n)$$
 \end{frame}
 
-\begin{frame}
+\begin{frame}[noframenumbering]
 \frametitle{Examples}
 Prove each of the following statements:
 
@@ -508,7 +508,7 @@ $$2^n \in \Omega(n^2)$$
 $$n \in \Theta(2n)$$
 \end{frame}
 
-\begin{frame}
+\begin{frame}[noframenumbering]
 \frametitle{Examples}
 Prove each of the following statements:
 
@@ -517,7 +517,7 @@ $$2^n \in \Omega(n^2): c = 1, n_0 = 1$$
 $$n \in \Theta(2n)$$
 \end{frame}
 
-\begin{frame}
+\begin{frame}[noframenumbering]
 \frametitle{Examples}
 Prove each of the following statements:
 
@@ -727,11 +727,11 @@ Note that this property is transitive: $A \leq_p B \text{ and } B \leq_q C \to A
 \begin{frame}
 \frametitle{$NP\text{-Complete}$}
 
-A language $A$ is $NP\text{-Complete}$ iff:
+A language $B$ is $NP\text{-Complete}$ iff:
 
 \begin{itemize}
-	\item $A \in NP$
-	\item and $\forall B \in NP, B \leq_p A$
+	\item $B \in NP$
+	\item and $\forall A \in NP, A \leq_p B$
 \end{itemize}
 
 If one $NP\text{-Complete}$ language is proven to be in $P$, then every $NP$ problem is also in $P$.
@@ -772,7 +772,7 @@ $SAT$ can be verified in polynomial time:
 
 \begin{frame}
 \frametitle{Cook-Levin Theorem}
-Cook showed that any $NTM\, M$ can be converted to a boolean formula such that:
+Cook showed that any $NTM\, M$ that halts in polynomial time can be converted to a polynomial length boolean formula such that:
 
 \begin{itemize}
 	\item If $M$ accepts, then the formula is satisfiable
