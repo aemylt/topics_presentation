@@ -232,11 +232,14 @@ This gave way to Universal Turing Machines; machines capable of running any $TM$
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
     \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
-    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
         (q0) edge node {$0 \to (0, R)$} (q1)
-        (q1) edge node {$1 \to (1, R)$} (qaccept)
-        (q1) edge node {$0 \to (0, R)$} (qreject);
+        (q1) edge node {$1 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$0 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
 \end{tikzpicture}
 \end{center}
 
@@ -251,11 +254,14 @@ Question: Does $M(01)$ accept or reject?
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
     \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
-    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
         (q0) edge node {$0 \to (0, R)$} (q1)
-        (q1) edge node {$1 \to (1, R)$} (qaccept)
-        (q1) edge node {$0 \to (0, R)$} (qreject);
+        (q1) edge node {$1 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$0 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
 \end{tikzpicture}
 \end{center}
 
@@ -270,11 +276,14 @@ Answer: $M(01)$ accepts!
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
     \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
-    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
         (q0) edge node {$0 \to (0, R)$} (q1)
         (q1) edge node {$0 \to (0, R)$} (qaccept)
-        (q1) edge node {$1 \to (1, R)$} (qreject);
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$1 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
 \end{tikzpicture}
 \end{center}
 
@@ -289,11 +298,14 @@ Question: Does $M(01)$ accept or reject?
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
     \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
-    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
         (q0) edge node {$0 \to (0, R)$} (q1)
         (q1) edge node {$0 \to (0, R)$} (qaccept)
-        (q1) edge node {$1 \to (1, R)$} (qreject);
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$1 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
 \end{tikzpicture}
 \end{center}
 
@@ -308,12 +320,14 @@ Answer: $M(01)$ rejects!
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
     \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
-    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
-        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
         (q1) edge node {$0 \to (0, R)$} (qaccept)
-        (q1) edge node {$\sqcup \to (1, R)$} (qreject)
-        (q1) edge [bend left] node {$1 \to (1, L)$} (q0);
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
 \end{tikzpicture}
 \end{center}
 
@@ -328,23 +342,25 @@ Question: Does $M(01)$ accept or reject?
     \node[state] (q0) at (0,0) {$q_0$};
     \node[state] (q1) [right of=q0] {$q_1$};
     \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
-    \node[accepting,state] (qreject) [below of=q1] {$q_{reject}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
     \path[->]
-        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
         (q1) edge node {$0 \to (0, R)$} (qaccept)
-        (q1) edge node {$\sqcup \to (1, R)$} (qreject)
-        (q1) edge [bend left] node {$1 \to (1, L)$} (q0);
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
 \end{tikzpicture}
 \end{center}
 
-Answer: $M(w)$ doesn't halt.
+Answer: $M(01)$ doesn't halt.
 \end{frame}
 
 \begin{frame}
 \frametitle{The halting problem}
 You might think it would be useful if we could tell when a machine was going to halt.
 
-Formally, we want a $TM\, H$ such that given $M \in TM \text{ and } w \in \Sigma_M^*$:
+Formally, we want a $TM\, H$ such that given $TM\, M \text{ and } w \in \Sigma_M^*$:
 
 \begin{itemize}
     \item $H(M, w)$ halts in the accept state if $M(w)$ halts and
@@ -354,6 +370,49 @@ Formally, we want a $TM\, H$ such that given $M \in TM \text{ and } w \in \Sigma
 Sadly, Turing proved that such a machine is impossible.
 
 There are many other unsolvable problems as well, within the area of {\bf computability theory}. We will not cover this area, but some reading on the subject is suggested at the end.
+\end{frame}
+
+\begin{frame}
+\frametitle{The reject state}
+
+The reject state is often defined implicitly for convenience.
+
+For any state except the accept state that doesn't have transitions for every symbol in the tape alphabet, it is assumed that there is a transition to the reject state.
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$1 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{The reject state}
+
+The reject state is often defined implicitly for convenience.
+
+For any state except the accept state that doesn't have transitions for every symbol in the tape alphabet, it is assumed that there is a transition to the reject state.
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept);
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 \begin{frame}
@@ -513,7 +572,7 @@ $$n \in \Theta(2n)$$
 Prove each of the following statements:
 
 $$n \in O(n^2): c = 1, n_0 = 0$$
-$$2^n \in \Omega(n^2): c = 1, n_0 = 1$$
+$$2^n \in \Omega(n^2): c = 1, n_0 = 0$$
 $$n \in \Theta(2n)$$
 \end{frame}
 
@@ -522,17 +581,8 @@ $$n \in \Theta(2n)$$
 Prove each of the following statements:
 
 $$n \in O(n^2): c = 1, n_0 = 0$$
-$$2^n \in \Omega(n^2): c = 1, n_0 = 1$$
+$$2^n \in \Omega(n^2): c = 1, n_0 = 0$$
 $$n \in \Theta(2n): c_1 = 0.5, c_2 = 1, n_0 = 0$$
-\end{frame}
-
-\begin{frame}
-\frametitle{Time Complexity Classes}
-Let $t: \mathbb{N} \to \mathbb{R}$ be a function.
-
-$\mathrm{TIME}(t(n))$ is all the languages that can be decided by a $TM$ in $O(t(n))$ time.
-
-$\mathrm{NTIME}(t(n))$ is all the languages that can be decided by a $NTM$ in $O(t(n))$ time.
 \end{frame}
 
 %------------------------------------------------
@@ -584,19 +634,28 @@ These are called {\em complexity classes}.
 \end{frame}
 
 \begin{frame}
+\frametitle{Time Complexity Classes}
+Let $t: \mathbb{N} \to \mathbb{R}$ be a function.
+
+$\mathrm{TIME}(t(n))$ is all the languages that can be decided by a $TM$ in $O(t(n))$ time.
+
+$\mathrm{NTIME}(t(n))$ is all the languages that can be decided by a $NTM$ in $O(t(n))$ time.
+\end{frame}
+
+\begin{frame}
 \frametitle{Deterministic polynomial time}
 One example of a complexity class is the set of languages that can be decided by a $TM$ in polynomial time.
 
-$$\bigcup_{k = 0}^{\inf} \mathrm{TIME}(n^k)$$
+$$\bigcup_{k = 0}^{\infty} \mathrm{TIME}(n^k)$$
 
 We shall refer to the set of these problems as $P$.
 \end{frame}
 
 \begin{frame}
 \frametitle{Nondeterministic polynomial time}
-One example of a complexity class is the set of languages that can be decided by a $NTM$ in polynomial time.
+Another example is the set of languages that can be decided by a $NTM$ in polynomial time.
 
-$$\bigcup_{k = 0}^{\inf} \mathrm{NTIME}(n^k)$$
+$$\bigcup_{k = 0}^{\infty} \mathrm{NTIME}(n^k)$$
 
 We shall refer to the set of these problems as $NP$.
 
@@ -667,33 +726,16 @@ Let $TM\, M$ decide $L$ in polynomial time. Define $V$ as follows:
 
 \begin{algorithm}[H]
 $V(w, c):$\\
-\If{$M(w)$ accepts}{
-    {\bf accept}
-}
-\Else{
-    {\bf reject}
-}
+\eIf{$M(w)$ accepts}{{\bf accept}}{{\bf reject}}
 \end{algorithm}
 
 $V$ verifies $L$ in polynomial time. Hence $P \subseteq NP$.
 \end{frame}
 
 \begin{frame}
-\frametitle{The harder side: Is $NP \subseteq P$}
+\frametitle{The harder side: Is $NP \subseteq P$?}
 
 Another way to think of this problem: {\em If a problem can be easily verified, can it be easily solved?}
-\end{frame}
-
-\begin{frame}
-\frametitle{How might we answer this question?}
-
-Why not look at the hardest problems in $NP$?
-
-If $P = NP$, then even the hardest problems in $NP$ will be solvable in polynomial time.
-
-And if $P \subset NP$, then these are the problems that won't have a polynomial time solution, as could be checked by lower-bound analysis.
-
-But how can we determine the hardest problems in $NP$?
 \end{frame}
 
 \begin{frame}
@@ -708,6 +750,18 @@ But how can we determine the hardest problems in $NP$?
 %------------------------------------------------
 \section{Completeness}
 %------------------------------------------------
+
+\begin{frame}
+\frametitle{How might we answer this question?}
+
+Why not look at the hardest problems in $NP$?
+
+If $P = NP$, then even the hardest problems in $NP$ will be solvable in polynomial time.
+
+And if $P \subset NP$, then these are the problems that won't have a polynomial time solution, as could be checked by lower-bound analysis.
+
+But how can we determine the hardest problems in $NP$?
+\end{frame}
 
 \begin{frame}
 \frametitle{Polynomial time reducible}
@@ -865,15 +919,7 @@ Complementary problems: $\text{co-}NP$
 \frametitle{What is a computer?}
 Probabilistic Turing Machines: $BPP, RP$
 
-Postselection: $\text{Post-}BPP$
-
 Parallel Computing: $NC$
-
-Talking to another, more powerful computer: $MA, IP$
-
-Oracles: $\Delta_iP, \Pi_iP, \Sigma_iP, PH$
-
-Advice: $P/poly, P/log$
 
 Quantum computers:  $EQP, BQP$
 
@@ -888,7 +934,7 @@ $$P \subseteq NP$$
 
 Becomes this:
 
-$$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = IP = P_{CTC} \subseteq EXP \subseteq EXPSPACE$$
+$$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = P_{CTC} \subseteq EXP \subseteq EXPSPACE$$
 \end{frame}
 
 \begin{frame}
@@ -992,6 +1038,10 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = IP = P_{C
 \includegraphics[scale=0.5]{smbc_comic_votey}\footnote{\url{http://www.smbc-comics.com/?id=3919}}
 \end{center}
 \end{frame}
+
+%------------------------------------------------
+\section{Suggested reading}
+%------------------------------------------------
 
 \begin{frame}
 \frametitle{Suggested books}
