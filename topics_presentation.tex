@@ -12,7 +12,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %----------------------------------------------------------------------------------------
-%	PACKAGES AND THEMES
+%    PACKAGES AND THEMES
 %----------------------------------------------------------------------------------------
 
 \documentclass[aspectratio=169]{beamer}
@@ -39,7 +39,7 @@
 \setlength{\parskip}{1em}
 
 %----------------------------------------------------------------------------------------
-%	TITLE PAGE
+%    TITLE PAGE
 %----------------------------------------------------------------------------------------
 
 \title[Complexity theory]{Topics in Quantum Engineering Presentation:\\Complexity Theory} % The short title appears at the bottom of every slide, the full title is only on the title page
@@ -60,7 +60,7 @@ University of Bristol \\ % Your institution for the title page
 \end{frame}
 
 %----------------------------------------------------------------------------------------
-%	PRESENTATION SLIDES
+%    PRESENTATION SLIDES
 %----------------------------------------------------------------------------------------
 
 %------------------------------------------------
@@ -140,7 +140,7 @@ arrows={east:.25cm, west:0.25cm}]
 \begin{scope}
 [shift={(3cm,-3cm)},start chain=circle placed {at=(-\tikzchaincount*60:1.5)}]
 \foreach \i in {q_0,q_1,q_2,q_3,\ddots,q_n}
-	\node [on chain] {$\i$};
+    \node [on chain] {$\i$};
 
 % Arrow to current state
 \node (center) {};
@@ -148,8 +148,8 @@ arrows={east:.25cm, west:0.25cm}]
 
 \node[rounded corners,draw=black,thick,fit=(circle-1) (circle-2) (circle-3) 
       (circle-4) (circle-5) (circle-6),
-			label=right:Set of States (CPU) with current state $q_0$] (fsbox)
-		{};
+            label=right:Set of States (CPU) with current state $q_0$] (fsbox)
+        {};
 \end{scope}
 
 %% Draw TM head below (input) tape cell
@@ -163,13 +163,13 @@ arrows={east:.25cm, west:0.25cm}]
 A Turing Machine $(TM)$ is specified as a tuple of seven components $(Q, \Sigma, \Gamma, q_0, q_{accept}, q_{reject})$:
 
 \begin{itemize}
-	\item $Q$ is the set of all possible states
-	\item $\Sigma$ is the input alphabet for the tape. Note that $\Sigma$ cannot contain the blank symbol $\sqcup$
-	\item $\Gamma$ is tape alphabet, where $\Sigma \subseteq \Gamma$ and $\sqcup \in \Gamma$
-	\item $q_0 \in Q$ is the start state
-	\item $q_{accept} \in Q$ is the accept state
-	\item $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
-	\item $\delta: Q \times \Gamma \to Q \times \Sigma \times \{L, R\}$ is the transition function
+    \item $Q$ is the set of all possible states
+    \item $\Sigma$ is the input alphabet for the tape. Note that $\Sigma$ cannot contain the blank symbol $\sqcup$
+    \item $\Gamma$ is tape alphabet, where $\Sigma \subseteq \Gamma$ and $\sqcup \in \Gamma$
+    \item $q_0 \in Q$ is the start state
+    \item $q_{accept} \in Q$ is the accept state
+    \item $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
+    \item $\delta: Q \times \Gamma \to Q \times \Sigma \times \{L, R\}$ is the transition function
 \end{itemize}
 \end{frame}
 
@@ -181,9 +181,9 @@ $q = q_0$\\
 $h = 0$\\
 $T = w$ \tcp*{Tape starts as just input, followed by blank cells}
 \While{$q \notin \{q_{accept}, q_{reject}\}$}{
-	$(q, h, i) = \delta(q, T_h)$\\
-	\eIf{$i = L$}{$h = h - 1$ \tcp*{Move tape head to the left}}
-	{$h = h + 1$ \tcp*{Move tape head to the right}}
+    $(q, h, i) = \delta(q, T_h)$\\
+    \eIf{$i = L$}{$h = h - 1$ \tcp*{Move tape head to the left}}
+    {$h = h + 1$ \tcp*{Move tape head to the right}}
 }
 \end{algorithm}
 \end{frame}
@@ -200,13 +200,13 @@ If the machine {\em rejected}, then the machine rejects and nothing is returned.
 \begin{frame}
 \frametitle{What can we store in a machine's memory?}
 \begin{itemize}
-	\item<1-> Integers
-	\item<2-> Rational numbers
-	\item<3-> Floating point numbers
-	\item<4-> Boolean (True/False) statements
-	\item<5-> Text
-	\item<6-> Graphs
-	\item<7-> Other machines
+    \item<1-> Integers
+    \item<2-> Rational numbers
+    \item<3-> Floating point numbers
+    \item<4-> Boolean (True/False) statements
+    \item<5-> Text
+    \item<6-> Graphs
+    \item<7-> Other machines
 \end{itemize}
 \end{frame}
 
@@ -347,8 +347,8 @@ You might think it would be useful if we could tell when a machine was going to 
 Formally, we want a $TM\, H$ such that given $M \in TM \text{ and } w \in \Sigma_M^*$:
 
 \begin{itemize}
-	\item $H(M, w)$ halts in the accept state if $M(w)$ halts and
-	\item $H(M, w)$ halts in the reject state if $M(w)$ does not halt.
+    \item $H(M, w)$ halts in the accept state if $M(w)$ halts and
+    \item $H(M, w)$ halts in the reject state if $M(w)$ does not halt.
 \end{itemize}
 
 Sadly, Turing proved that such a machine is impossible.
@@ -361,13 +361,13 @@ There are many other unsolvable problems as well, within the area of {\bf comput
 A Nondeterministic Turing Machine $(NTM)$ is specified as a tuple of seven components $(Q, \Sigma, \Gamma, q_0, q_{accept}, q_{reject})$:
 
 \begin{itemize}
-	\item $Q$ is the set of all possible states
-	\item $\Sigma$ is the input alphabet for the tape. Note that $\Sigma$ cannot contain the blank symbol $\sqcup$
-	\item $\Gamma$ is tape alphabet, where $\Sigma \subseteq \Gamma$ and $\sqcup \in \Gamma$
-	\item $q_0 \in Q$ is the start state
-	\item $q_{accept} \in Q$ is the accept state
-	\item $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
-	\item $\delta: Q \times \Gamma \to (Q \times \Sigma \times \{L, R\})^*$ is the transition function
+    \item $Q$ is the set of all possible states
+    \item $\Sigma$ is the input alphabet for the tape. Note that $\Sigma$ cannot contain the blank symbol $\sqcup$
+    \item $\Gamma$ is tape alphabet, where $\Sigma \subseteq \Gamma$ and $\sqcup \in \Gamma$
+    \item $q_0 \in Q$ is the start state
+    \item $q_{accept} \in Q$ is the accept state
+    \item $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
+    \item $\delta: Q \times \Gamma \to (Q \times \Sigma \times \{L, R\})^*$ is the transition function
 \end{itemize}
 \end{frame}
 
@@ -422,11 +422,11 @@ A {\em language} $L$ is a (potentially infinite) set.
 
 Example languages:
 \begin{itemize}
-	\item Text strings that contain the word ``Hello''
-	\item Satisfiable boolean expressions
-	\item Eulerian graphs
-	\item Hamiltonian graphs
-	\item $(M, w)$ such that $M(w)$ halts
+    \item Text strings that contain the word ``Hello''
+    \item Satisfiable boolean expressions
+    \item Eulerian graphs
+    \item Hamiltonian graphs
+    \item $(M, w)$ such that $M(w)$ halts
 \end{itemize}
 \end{frame}
 
@@ -435,8 +435,8 @@ Example languages:
 A language $L$ is {\em decidable} if there exists a machine $M$ such that:
 
 \begin{itemize}
-	\item $\forall w \in L, M(w) \text{ accepts}$
-	\item $\forall w \notin L, M(w) \text{ rejects}$
+    \item $\forall w \in L, M(w) \text{ accepts}$
+    \item $\forall w \notin L, M(w) \text{ rejects}$
 \end{itemize}
 \end{frame}
 
@@ -445,8 +445,8 @@ A language $L$ is {\em decidable} if there exists a machine $M$ such that:
 A language $L$ is {\em verifiable} if there exists a machine $V$ such that:
 
 \begin{itemize}
-	\item $\forall w \in L, \exists c \in \Sigma^* \text{ s.t. } V(w, c) \text{ accepts}$
-	\item $\forall w \notin L, \forall c \in \Sigma^*, V(w, c) \text{ rejects }$
+    \item $\forall w \in L, \exists c \in \Sigma^* \text{ s.t. } V(w, c) \text{ accepts}$
+    \item $\forall w \notin L, \forall c \in \Sigma^*, V(w, c) \text{ rejects }$
 \end{itemize}
 \end{frame}
 
@@ -715,9 +715,9 @@ But how can we determine the hardest problems in $NP$?
 Take two languages $A$ and $B$. We say that $A \leq_p B$ iff $\exists TM\, M$ such that:
 
 \begin{itemize}
-	\item $\forall w \in A, M(w) \in B$
-	\item $\forall w \notin A, M(w) \notin B$
-	\item and $M$ runs in worst-case $O(p(n))$ time for some polynomial $p$, where $n = |w|$
+    \item $\forall w \in A, M(w) \in B$
+    \item $\forall w \notin A, M(w) \notin B$
+    \item and $M$ runs in worst-case $O(p(n))$ time for some polynomial $p$, where $n = |w|$
 \end{itemize}
 
 Note that this property is transitive: $A \leq_p B \text{ and } B \leq_q C \to A \leq_{p + q} C$
@@ -730,8 +730,8 @@ Note that this property is transitive: $A \leq_p B \text{ and } B \leq_q C \to A
 A language $B$ is $NP\text{-Complete}$ iff:
 
 \begin{itemize}
-	\item $B \in NP$
-	\item and $\forall A \in NP, A \leq_p B$
+    \item $B \in NP$
+    \item and $\forall A \in NP, A \leq_p B$
 \end{itemize}
 
 If one $NP\text{-Complete}$ language is proven to be in $P$, then every $NP$ problem is also in $P$.
@@ -752,8 +752,8 @@ We say that $f$ is {\em satisfiable} if we can assign $0$ or $1$ to each variabl
 
 Examples:
 \begin{itemize}
-	\item $f$ is satisfiable: $(a = 1, b = 1, c = 0)$
-	\item but $f' = x \wedge \bar{x}$ is not satisfiable
+    \item $f$ is satisfiable: $(a = 1, b = 1, c = 0)$
+    \item but $f' = x \wedge \bar{x}$ is not satisfiable
 \end{itemize}
 
 We call $SAT$ the language of all satisfiable boolean formulae.
@@ -764,9 +764,9 @@ We call $SAT$ the language of all satisfiable boolean formulae.
 $SAT$ can be verified in polynomial time:
 
 \begin{itemize}
-	\item Make the certificate the values we assign to each variable.
-	\item Have $V$ substitute the value for each variable into the formula.
-	\item Accept if the formula evaluates to $1$, otherwise reject.
+    \item Make the certificate the values we assign to each variable.
+    \item Have $V$ substitute the value for each variable into the formula.
+    \item Accept if the formula evaluates to $1$, otherwise reject.
 \end{itemize}
 \end{frame}
 
@@ -775,8 +775,8 @@ $SAT$ can be verified in polynomial time:
 Cook showed that any $NTM\, M$ that halts in polynomial time can be converted to a polynomial length boolean formula such that:
 
 \begin{itemize}
-	\item If $M$ accepts, then the formula is satisfiable
-	\item and if $M$ rejects, then the formula cannot be satisfied.
+    \item If $M$ accepts, then the formula is satisfiable
+    \item and if $M$ rejects, then the formula cannot be satisfied.
 \end{itemize}
 
 As a result, it was proven that $SAT \in NP\text{-Complete}$.
@@ -792,24 +792,24 @@ Recall that polynomial-time reducibility is transitive.
 So we can now provide a recursive definition. $B \in NP\text{-Complete}$ iff:
 
 \begin{itemize}
-	\item $B = SAT$
-	\item or $B \in NP \text{ and } \exists A \in NP\text{-Complete s.t. } A \leq_p B$
+    \item $B = SAT$
+    \item or $B \in NP \text{ and } \exists A \in NP\text{-Complete s.t. } A \leq_p B$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Other $NP\text{-Complete}$ problems}
 \begin{itemize}
-	\item<1-> $3SAT$
-	\item<2-> Hamiltonian graphs
-	\item<3-> Cliques
-	\item<4-> Knapsack
-	\item<5-> Tetris
-	\item<6-> Lemmings
-	\item<7-> Super Mario Bros
-	\item<8-> Bejeweled
-	\item<9-> Candy Crush Saga
-	\item<10-> Flood-It
+    \item<1-> $3SAT$
+    \item<2-> Hamiltonian graphs
+    \item<3-> Cliques
+    \item<4-> Knapsack
+    \item<5-> Tetris
+    \item<6-> Lemmings
+    \item<7-> Super Mario Bros
+    \item<8-> Bejeweled
+    \item<9-> Candy Crush Saga
+    \item<10-> Flood-It
 \end{itemize}
 \end{frame}
 
@@ -905,17 +905,17 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = IP = P_{C
 % LOG TIME
 \draw (-1,0) parabola bend (0,2) (1,0) ;
 \node at (0,1) {
-	\begin{tabular}{c}
-	L \\ Time
-	\end{tabular}
+    \begin{tabular}{c}
+    L \\ Time
+    \end{tabular}
 };
 
 % LOG SPACE
 \draw (-2,0) parabola bend (0,3.5) (2,0);
 \node at (0,2.5) {
-	\begin{tabular}{c}
-	L
-	\end{tabular}
+    \begin{tabular}{c}
+    L
+    \end{tabular}
 };
 
 % PTIME
@@ -949,10 +949,10 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = IP = P_{C
 \draw (-9,0) parabola bend (0,11.5) (9,0);
 \node at (0,10.5) {$\vdots$};
 \node[anchor=north] at (0,11.4) {
-	\begin{tabular}{c}
-		ELEMENTARY \\
-		2EXP
-	\end{tabular}
+    \begin{tabular}{c}
+        ELEMENTARY \\
+        2EXP
+    \end{tabular}
 };
 
 % RECURSIVE
@@ -964,14 +964,14 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = IP = P_{C
 \begin{frame}
 \frametitle{Open problems in complexity theory}
 \begin{itemize}
-	\item<1-> Does $P = NP$?
-	\item<2-> Does $L = NL$?
-	\item<3-> Does $BPP = P$?
-	\item<4-> Does $BQP = BPP$?
-	\item<5-> Does $NC = P$?
-	\item<6-> Does $P = PSPACE$?
-	\item<7-> Does $NP = \text{co-}NP$?
-	\item<8-> And lots more...
+    \item<1-> Does $P = NP$?
+    \item<2-> Does $L = NL$?
+    \item<3-> Does $BPP = P$?
+    \item<4-> Does $BQP = BPP$?
+    \item<5-> Does $NC = P$?
+    \item<6-> Does $P = PSPACE$?
+    \item<7-> Does $NP = \text{co-}NP$?
+    \item<8-> And lots more...
 \end{itemize}
 \end{frame}
 
@@ -996,24 +996,24 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = IP = P_{C
 \begin{frame}
 \frametitle{Suggested books}
 \begin{itemize}
-	\item {\em Quantum Computing Since Democritus} by Scott Aaronson offers a broad overview of many complexity classes
-	\item {\em Introduction to the Theory of Computation} by Michael Sipser is the recommended textbook for most computability and complexity theory courses
+    \item {\em Quantum Computing Since Democritus} by Scott Aaronson offers a broad overview of many complexity classes
+    \item {\em Introduction to the Theory of Computation} by Michael Sipser is the recommended textbook for most computability and complexity theory courses
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Suggested papers}
 \begin{itemize}
-	\item {\em On Computable Numbers, with an Application to the Entscheidungsproblem} by Alan Turing is Turing's PhD thesis, which provides the original definition of Turing Machines, a formal definition of the Universal Turing Machine, and a proof that the Halting problem is undecidable
-	\item {\em The Complexity of Theorem Proving Procedures} by Stephen Cook provides the proof that $SAT \in NP\text{-Complete}$
-	\item {\em Reducibility Among Combinatorial Problems} by Richard Karp provides 21 of the earliest problems proven to be $NP\text{-Complete}$
+    \item {\em On Computable Numbers, with an Application to the Entscheidungsproblem} by Alan Turing is Turing's PhD thesis, which provides the original definition of Turing Machines, a formal definition of the Universal Turing Machine, and a proof that the Halting problem is undecidable
+    \item {\em The Complexity of Theorem Proving Procedures} by Stephen Cook provides the proof that $SAT \in NP\text{-Complete}$
+    \item {\em Reducibility Among Combinatorial Problems} by Richard Karp provides 21 of the earliest problems proven to be $NP\text{-Complete}$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Suggested websites}
 \begin{itemize}
-	\item \url{https://complexityzoo.uwaterloo.ca/} is a Wiki originally developed by Scott Aaronson, which provides a list of every complexity class ever stated
+    \item \url{https://complexityzoo.uwaterloo.ca/} is a Wiki originally developed by Scott Aaronson, which provides a list of every complexity class ever stated
 \end{itemize}
 \end{frame}
 
