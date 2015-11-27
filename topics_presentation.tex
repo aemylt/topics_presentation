@@ -74,26 +74,26 @@ University of Bristol \\ % Your institution for the title page
 
 \begin{frame}
 \frametitle{What is complexity theory?}
-Complexity theory is the study of how difficult it is to solve a problem with a computer.
+Complexity theory is the study of what problems are easy to solve with a computer.
 \end{frame}
 
 \begin{frame}
 \frametitle{What is complexity theory?}
-Complexity theory is the study of how {\color{red} difficult} it is to solve a problem with a computer.
+Complexity theory is the study of what problems are {\color{red} easy} to solve with a computer.
 
-How do we measure difficulty?
+How do we measure the difficulty of a problem?
 \end{frame}
 
 \begin{frame}
 \frametitle{What is complexity theory?}
-Complexity theory is the study of how difficult it is to solve a {\color{red} problem} with a computer.
+Complexity theory is the study of what {\color{red} problems} are easy to solve with a computer.
 
 What is a problem?
 \end{frame}
 
 \begin{frame}
 \frametitle{What is complexity theory?}
-Complexity theory is the study of how difficult it is to solve a problem with a {\color{red} computer}.
+Complexity theory is the study of what problems are easy to solve on a {\color{red} computer}.
 
 What is a computer?
 \end{frame}
@@ -103,7 +103,7 @@ What is a computer?
 \begin{itemize}
     \item What is a computer?
     \item What is a problem?
-    \item How do we measure difficulty?
+    \item How do we measure the difficulty of a problem?
 \end{itemize}
 \end{frame}
 
@@ -443,23 +443,427 @@ These setups are run simultaneously, and the machine accepts if one setup halts 
 
 \begin{frame}
 \frametitle{Computation Tree}
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s3) at (-2,-2) {$s_3$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\node[state] (s5) at (3,-2) {$s_5$};
+	\node[state] (s6) at (-3,-3) {$s_6$};
+	\node[state] (s7) at (-1,-3) {$s_7$};
+	\node[state] (s8) at (0,-3) {$s_8$};
+	\node[state, accepting] (s9) at (2,-3) {$s_9$};
+	\node[state] (s10) at (3,-3) {$s_{10}$};
+	\node[state] (s11) at (-3,-4) {$s_{11}$};
+	\node[state] (s12) at (-1,-4) {$s_{12}$};
+	\node[state] (s13) at (1,-4) {$s_{13}$};
+	\node[state] (s14) at (3,-4) {$s_{14}$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s0) edge node {} (s2)
+		(s1) edge node {} (s3)
+		(s2) edge node {} (s4)
+		(s2) edge node {} (s5)
+		(s3) edge node {} (s6)
+		(s3) edge node {} (s7)
+		(s4) edge node {} (s8)
+		(s4) edge node {} (s9)
+		(s5) edge node {} (s10)
+		(s6) edge node {} (s11)
+		(s8) edge node {} (s12)
+		(s8) edge node {} (s13)
+		(s10) edge node {} (s14);
+\end{tikzpicture}
+\end{center}
 
+Vertices are single setups (current state, tape contents and head position) for an $NTM$ running on an input. Edges are transitions.
 \end{frame}
 
 \begin{frame}
 \frametitle{Power of Nondeterminism}
-Note that a $TM$s only transition from one machine setup to another, while $NTM$s transition from one to many.
-
-From this, we can conclude that any $TM$ is by definition also an $NTM$.
+Any $TM$ is by definition also an $NTM$. The computation tree for a $TM$ looks like this:
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (0,-1) {$s_1$};
+	\node[state] (s2) at (0,-2) {$s_2$};
+	\node[state, accepting] (s3) at (0,-3) {$s_3$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s1) edge node {} (s2)
+		(s2) edge node {} (s3);
+\end{tikzpicture}
+\end{center}
 
 Question: Is there any problem that can be solved by an $NTM$ that cannot be solved by a $TM$?
 \end{frame}
 
 \begin{frame}
 \frametitle{Using $TM$s to simulate $NTM$s}
-Recall the computation tree:
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s3) at (-2,-2) {$s_3$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\node[state] (s5) at (3,-2) {$s_5$};
+	\node[state] (s6) at (-3,-3) {$s_6$};
+	\node[state] (s7) at (-1,-3) {$s_7$};
+	\node[state] (s8) at (0,-3) {$s_8$};
+	\node[state, accepting] (s9) at (2,-3) {$s_9$};
+	\node[state] (s10) at (3,-3) {$s_{10}$};
+	\node[state] (s11) at (-3,-4) {$s_{11}$};
+	\node[state] (s12) at (-1,-4) {$s_{12}$};
+	\node[state] (s13) at (1,-4) {$s_{13}$};
+	\node[state] (s14) at (3,-4) {$s_{14}$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s0) edge node {} (s2)
+		(s1) edge node {} (s3)
+		(s2) edge node {} (s4)
+		(s2) edge node {} (s5)
+		(s3) edge node {} (s6)
+		(s3) edge node {} (s7)
+		(s4) edge node {} (s8)
+		(s4) edge node {} (s9)
+		(s5) edge node {} (s10)
+		(s6) edge node {} (s11)
+		(s8) edge node {} (s12)
+		(s8) edge node {} (s13)
+		(s10) edge node {} (s14);
+\end{tikzpicture}
+\end{center}
 
-We can use Breadth-First Search to search every branch until we find one that halts in an accept state.
+We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Breadth-first_search}} to search the computation tree until we find an accept state.
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Using $TM$s to simulate $NTM$s}
+\begin{center}
+\begin{tikzpicture}
+	\edef\sizetape{0.7cm}
+	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+	%% Draw TM tape
+	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+	    \node [on chain=1,tmtape] {$s_0$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Using $TM$s to simulate $NTM$s}
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+
+	\edef\sizetape{0.7cm}
+	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+	%% Draw TM tape
+	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+	    \node [on chain=1,tmtape] {$s_1$};
+	    \node [on chain=1,tmtape] {$s_2$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Using $TM$s to simulate $NTM$s}
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\path[->]
+		(s0) edge node {} (s1);
+
+	\edef\sizetape{0.7cm}
+	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+	%% Draw TM tape
+	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+	    \node [on chain=1,tmtape] {$s_2$};
+	    \node [on chain=1,tmtape] {$s_3$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Using $TM$s to simulate $NTM$s}
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s0) edge node {} (s2);
+
+	\edef\sizetape{0.7cm}
+	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+	%% Draw TM tape
+	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+	    \node [on chain=1,tmtape] {$s_3$};
+	    \node [on chain=1,tmtape] {$s_4$};
+	    \node [on chain=1,tmtape] {$s_5$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Using $TM$s to simulate $NTM$s}
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s3) at (-2,-2) {$s_3$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s0) edge node {} (s2)
+		(s1) edge node {} (s3);
+
+	\edef\sizetape{0.7cm}
+	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+	%% Draw TM tape
+	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+	    \node [on chain=1,tmtape] {$s_4$};
+	    \node [on chain=1,tmtape] {$s_5$};
+	    \node [on chain=1,tmtape] {$s_6$};
+	    \node [on chain=1,tmtape] {$s_7$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Using $TM$s to simulate $NTM$s}
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s3) at (-2,-2) {$s_3$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s0) edge node {} (s2)
+		(s1) edge node {} (s3)
+		(s2) edge node {} (s4);
+
+	\edef\sizetape{0.7cm}
+	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+	%% Draw TM tape
+	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+	    \node [on chain=1,tmtape] {$s_5$};
+	    \node [on chain=1,tmtape] {$s_6$};
+	    \node [on chain=1,tmtape] {$s_7$};
+	    \node [on chain=1,tmtape] {$s_8$};
+	    \node [on chain=1,tmtape] {$s_9$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Using $TM$s to simulate $NTM$s}
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s3) at (-2,-2) {$s_3$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\node[state] (s5) at (3,-2) {$s_5$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s0) edge node {} (s2)
+		(s1) edge node {} (s3)
+		(s2) edge node {} (s4)
+		(s2) edge node {} (s5);
+
+	\edef\sizetape{0.7cm}
+	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+	%% Draw TM tape
+	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+	    \node [on chain=1,tmtape] {$s_6$};
+	    \node [on chain=1,tmtape] {$s_7$};
+	    \node [on chain=1,tmtape] {$s_8$};
+	    \node [on chain=1,tmtape] {$s_9$};
+	    \node [on chain=1,tmtape] {$s_{10}$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Using $TM$s to simulate $NTM$s}
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s3) at (-2,-2) {$s_3$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\node[state] (s5) at (3,-2) {$s_5$};
+	\node[state] (s6) at (-3,-3) {$s_6$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s0) edge node {} (s2)
+		(s1) edge node {} (s3)
+		(s2) edge node {} (s4)
+		(s2) edge node {} (s5)
+		(s3) edge node {} (s6);
+
+	\edef\sizetape{0.7cm}
+	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+	%% Draw TM tape
+	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+	    \node [on chain=1,tmtape] {$s_7$};
+	    \node [on chain=1,tmtape] {$s_8$};
+	    \node [on chain=1,tmtape] {$s_9$};
+	    \node [on chain=1,tmtape] {$s_{10}$};
+	    \node [on chain=1,tmtape] {$s_{11}$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Using $TM$s to simulate $NTM$s}
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s3) at (-2,-2) {$s_3$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\node[state] (s5) at (3,-2) {$s_5$};
+	\node[state] (s6) at (-3,-3) {$s_6$};
+	\node[state] (s7) at (-1,-3) {$s_7$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s0) edge node {} (s2)
+		(s1) edge node {} (s3)
+		(s2) edge node {} (s4)
+		(s2) edge node {} (s5)
+		(s3) edge node {} (s6)
+		(s3) edge node {} (s7);
+
+	\edef\sizetape{0.7cm}
+	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+	%% Draw TM tape
+	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+	    \node [on chain=1,tmtape] {$s_8$};
+	    \node [on chain=1,tmtape] {$s_9$};
+	    \node [on chain=1,tmtape] {$s_{10}$};
+	    \node [on chain=1,tmtape] {$s_{11}$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Using $TM$s to simulate $NTM$s}
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s3) at (-2,-2) {$s_3$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\node[state] (s5) at (3,-2) {$s_5$};
+	\node[state] (s6) at (-3,-3) {$s_6$};
+	\node[state] (s7) at (-1,-3) {$s_7$};
+	\node[state] (s8) at (0,-3) {$s_8$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s0) edge node {} (s2)
+		(s1) edge node {} (s3)
+		(s2) edge node {} (s4)
+		(s2) edge node {} (s5)
+		(s3) edge node {} (s6)
+		(s3) edge node {} (s7)
+		(s4) edge node {} (s8);
+
+	\edef\sizetape{0.7cm}
+	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+	%% Draw TM tape
+	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+	    \node [on chain=1,tmtape] {$s_9$};
+	    \node [on chain=1,tmtape] {$s_{10}$};
+	    \node [on chain=1,tmtape] {$s_{11}$};
+	    \node [on chain=1,tmtape] {$s_{12}$};
+	    \node [on chain=1,tmtape] {$s_{13}$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Using $TM$s to simulate $NTM$s}
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s3) at (-2,-2) {$s_3$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\node[state] (s5) at (3,-2) {$s_5$};
+	\node[state] (s6) at (-3,-3) {$s_6$};
+	\node[state] (s7) at (-1,-3) {$s_7$};
+	\node[state] (s8) at (0,-3) {$s_8$};
+	\node[state, accepting] (s9) at (2,-3) {$s_9$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s0) edge node {} (s2)
+		(s1) edge node {} (s3)
+		(s2) edge node {} (s4)
+		(s2) edge node {} (s5)
+		(s3) edge node {} (s6)
+		(s3) edge node {} (s7)
+		(s4) edge node {} (s8)
+		(s4) edge node {} (s9);
+
+	\edef\sizetape{0.7cm}
+	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+	%% Draw TM tape
+	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+	    \node [on chain=1,tmtape] {$s_{10}$};
+	    \node [on chain=1,tmtape] {$s_{11}$};
+	    \node [on chain=1,tmtape] {$s_{12}$};
+	    \node [on chain=1,tmtape] {$s_{13}$};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 \begin{frame}
@@ -467,7 +871,7 @@ We can use Breadth-First Search to search every branch until we find one that ha
 \begin{itemize}
     \item What is a computer? {\em Deterministic Turing Machine, Nondeterministic Turing Machine}
     \item What is a problem?
-    \item How do we measure difficulty?
+    \item How do we measure the difficulty of a problem?
 \end{itemize}
 \end{frame}
 
@@ -514,12 +918,12 @@ A language $L$ is {\em verifiable} if there exists a machine $V$ such that:
 \begin{itemize}
     \item What is a computer? {\em Deterministic Turing Machine, Nondeterministic Turing Machine}
     \item What is a problem? {\em Deciding if a word is in a language, verifying that a word is in a language}
-    \item How do we measure difficulty?
+    \item How do we measure the difficulty of a problem?
 \end{itemize}
 \end{frame}
 
 %------------------------------------------------
-\section{How do we measure difficulty?}
+\section{How do we measure the difficulty of a problem?}
 %------------------------------------------------
 
 \begin{frame}
@@ -594,7 +998,7 @@ $$n \in \Theta(2n): c_1 = 0.5, c_2 = 1, n_0 = 0$$
 \begin{itemize}
     \item What is a computer? {\em Deterministic Turing Machine, Nondeterministic Turing Machine}
     \item What is a problem? {\em Deciding if a word is in a language, verifying that a word is in a language}
-    \item How do we measure difficulty? {\em Upper bound of time for an input of length $n$}
+    \item How do we measure the difficulty of a problem? {\em Upper bound of time for an input of length $n$}
 \end{itemize}
 \end{frame}
 
@@ -665,19 +1069,153 @@ We can also define $NP$ as the set of languages that can be verified by a $TM$ i
 \begin{frame}
 \frametitle{From nondeterminism to verification}
 Recall the computation tree for an $NTM$.
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s3) at (-2,-2) {$s_3$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\node[state] (s5) at (3,-2) {$s_5$};
+	\node[state] (s6) at (-3,-3) {$s_6$};
+	\node[state] (s7) at (-1,-3) {$s_7$};
+	\node[state] (s8) at (0,-3) {$s_8$};
+	\node[state, accepting] (s9) at (2,-3) {$s_9$};
+	\node[state] (s10) at (3,-3) {$s_{10}$};
+	\node[state] (s11) at (-3,-4) {$s_{11}$};
+	\node[state] (s12) at (-1,-4) {$s_{12}$};
+	\node[state] (s13) at (1,-4) {$s_{13}$};
+	\node[state] (s14) at (3,-4) {$s_{14}$};
+	\path[->]
+		(s0) edge node {} (s1)
+		(s0) edge node {} (s2)
+		(s1) edge node {} (s3)
+		(s2) edge node {} (s4)
+		(s2) edge node {} (s5)
+		(s3) edge node {} (s6)
+		(s3) edge node {} (s7)
+		(s4) edge node {} (s8)
+		(s4) edge node {} (s9)
+		(s5) edge node {} (s10)
+		(s6) edge node {} (s11)
+		(s8) edge node {} (s12)
+		(s8) edge node {} (s13)
+		(s10) edge node {} (s14);
+\end{tikzpicture}
+\end{center}
 
-We label each branch with some integer.
+We label each branch with an integer such that the labels are unique between siblings.
+\end{frame}
 
-Our certificate $c$ is now the polynomial length sequence of integers that lead to the accepting state.
+\begin{frame}[noframenumbering]
+\frametitle{From nondeterminism to verification}
+Recall the computation tree for an $NTM$.
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s1) at (-2,-1) {$s_1$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s3) at (-2,-2) {$s_3$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\node[state] (s5) at (3,-2) {$s_5$};
+	\node[state] (s6) at (-3,-3) {$s_6$};
+	\node[state] (s7) at (-1,-3) {$s_7$};
+	\node[state] (s8) at (0,-3) {$s_8$};
+	\node[state, accepting] (s9) at (2,-3) {$s_9$};
+	\node[state] (s10) at (3,-3) {$s_{10}$};
+	\node[state] (s11) at (-3,-4) {$s_{11}$};
+	\node[state] (s12) at (-1,-4) {$s_{12}$};
+	\node[state] (s13) at (1,-4) {$s_{13}$};
+	\node[state] (s14) at (3,-4) {$s_{14}$};
+	\path[->]
+		(s0) edge [anchor=north] node {0} (s1)
+		(s0) edge [anchor=north] node {1} (s2)
+		(s1) edge [anchor=east] node {0} (s3)
+		(s2) edge [anchor=east] node {0} (s4)
+		(s2) edge [anchor=east] node {1} (s5)
+		(s3) edge [anchor=east] node {0} (s6)
+		(s3) edge [anchor=east] node {1} (s7)
+		(s4) edge [anchor=east] node {0} (s8)
+		(s4) edge [anchor=east] node {1} (s9)
+		(s5) edge [anchor=east] node {0} (s10)
+		(s6) edge [anchor=east] node {0} (s11)
+		(s8) edge [anchor=east] node {0} (s12)
+		(s8) edge [anchor=east] node {1} (s13)
+		(s10) edge [anchor=east] node {0} (s14);
+\end{tikzpicture}
+\end{center}
+
+We label each branch with an integer such that the labels are unique between siblings.
+\end{frame}
+
+\begin{frame}
+\frametitle{From nondeterminism to verification}
+Our certificate $c$ is now the polynomial length sequence that leads to the accepting state. In this case $c=101$, as can be verified in polynomial time by following the certificate down the tree:
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{From nondeterminism to verification}
+Our certificate $c$ is now the polynomial length sequence that leads to the accepting state. In this case $c=101$, as can be verified in polynomial time by following the certificate down the tree:
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\path[->]
+		(s0) edge [anchor=north] node {1} (s2);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{From nondeterminism to verification}
+Our certificate $c$ is now the polynomial length sequence that leads to the accepting state. In this case $c=101$, as can be verified in polynomial time by following the certificate down the tree:
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\path[->]
+		(s0) edge [anchor=north] node {1} (s2)
+		(s2) edge [anchor=east] node {0} (s4);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{From nondeterminism to verification}
+Our certificate $c$ is now the polynomial length sequence that leads to the accepting state. In this case $c=101$, as can be verified in polynomial time by following the certificate down the tree:
+\begin{center}
+\begin{tikzpicture}
+	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+	\node[state] (s0) at (0,0) {$s_0$};
+	\node[state] (s2) at (2,-1) {$s_2$};
+	\node[state] (s4) at (1,-2) {$s_4$};
+	\node[state, accepting] (s9) at (2,-3) {$s_9$};
+	\path[->]
+		(s0) edge [anchor=north] node {1} (s2)
+		(s2) edge [anchor=east] node {0} (s4)
+		(s4) edge [anchor=east] node {1} (s9);
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{From verification to nondeterminism}
-Since the verifier runs in polynomial time, the certificate must be polynomial in length.
+Since the verifier runs in polynomial time, at most a polynomial number of characters can be read from the certificate.
 
-We use nondeterminism to brute force the certificate.
+We use nondeterminism to brute force the certificate in polynomial time.
 
-And then run the verifier on every certificate.
+And then we run the verifier on every certificate in polynomial time.
 \end{frame}
 
 \begin{frame}
@@ -802,11 +1340,11 @@ So can we convert an $NTM$ to some other problem?
 \frametitle{Satisfiable boolean formulae}
 Take a boolean formula $f = a \vee b \wedge \bar{c}$.
 
-We say that $f$ is {\em satisfiable} if we can assign $0$ or $1$ to each variable such that $f = 1$.
+We say that $f$ is {\em satisfiable} if we can assign $\bot$ or $\top$ to each variable such that $f = \top$.
 
 Examples:
 \begin{itemize}
-    \item $f$ is satisfiable: $(a = 1, b = 1, c = 0)$
+    \item $f$ is satisfiable: $(a = \top, b = \top, c =  \bot)$
     \item but $f' = x \wedge \bar{x}$ is not satisfiable
 \end{itemize}
 
@@ -820,17 +1358,17 @@ $SAT$ can be verified in polynomial time:
 \begin{itemize}
     \item Make the certificate the values we assign to each variable.
     \item Have $V$ substitute the value for each variable into the formula.
-    \item Accept if the formula evaluates to $1$, otherwise reject.
+    \item Accept if the formula evaluates to $\top$, otherwise reject.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Cook-Levin Theorem}
-Cook showed that any $NTM\, M$ that halts in polynomial time can be converted to a polynomial length boolean formula such that:
+Cook showed that any $NTM\, M$ that halts in polynomial time running on input $w$ can be converted to a polynomial length boolean formula such that:
 
 \begin{itemize}
-    \item If $M$ accepts, then the formula is satisfiable
-    \item and if $M$ rejects, then the formula cannot be satisfied.
+    \item If $M(w)$ accepts, then the formula is satisfiable
+    \item and if $M(w)$ rejects, then the formula cannot be satisfied.
 \end{itemize}
 
 As a result, it was proven that $SAT \in NP\text{-Complete}$.
@@ -856,7 +1394,7 @@ So we can now provide a recursive definition. $B \in NP\text{-Complete}$ iff:
 \begin{itemize}
     \item<1-> $3SAT$
     \item<2-> Hamiltonian graphs
-    \item<3-> Cliques
+    \item<3-> 0-1 Integer Programming
     \item<4-> Knapsack
     \item<5-> Tetris
     \item<6-> Lemmings
@@ -890,13 +1428,13 @@ Recall our three questions from part one:
 \begin{itemize}
     \item What is a computer?
     \item What is a problem?
-    \item How do we measure difficulty?
+    \item How do we measure the difficulty of a problem?
 \end{itemize}
 What if we answered these differently?
 \end{frame}
 
 \begin{frame}
-\frametitle{How do we measure difficulty?}
+\frametitle{How do we measure the difficulty of a problem?}
 Exponential time: $EXP$
 
 Linear time: $LIN$
