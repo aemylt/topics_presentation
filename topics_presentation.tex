@@ -42,7 +42,7 @@
 %    TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Complexity theory]{Topics in Quantum Engineering Presentation:\\Complexity Theory} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Complexity theory]{Complexity Theory} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author{Dominic Moylett} % Your name
 \institute[University of Bristol] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
@@ -63,13 +63,24 @@ University of Bristol \\ % Your institution for the title page
 %    PRESENTATION SLIDES
 %----------------------------------------------------------------------------------------
 
+\begin{frame}
+\frametitle{Summary of Presentation}
+This presentation will consist of two parts:
+\begin{itemize}
+	\item Part one will look at the building blocks of complexity classes
+	\item And part two will look at the consequences of the complexity classes we defined
+\end{itemize}
+
+We'll finish by exploring other aspects of complexity theory, and giving examples of other complexity classes and open problems out there.
+\end{frame}
+
 %------------------------------------------------
 \section{Introduction: What is complexity theory?}
 %------------------------------------------------
 
 \begin{frame}
 \frametitle{Complexity theory in a nutshell}
-\centerline{``How hard can it be?'', {\em Clarkson, Hammond and May}}
+\centerline{``How hard can it be?'', {\em Clarkson, Hammond, May}}
 \end{frame}
 
 \begin{frame}
@@ -81,7 +92,7 @@ Complexity theory is the study of what problems are easy to solve with a compute
 \frametitle{What is complexity theory?}
 Complexity theory is the study of what problems are {\color{red} easy} to solve with a computer.
 
-How do we measure the difficulty of a problem?
+How do we measure performance?
 \end{frame}
 
 \begin{frame}
@@ -93,7 +104,7 @@ What is a problem?
 
 \begin{frame}
 \frametitle{What is complexity theory?}
-Complexity theory is the study of what problems are easy to solve on a {\color{red} computer}.
+Complexity theory is the study of what problems are easy to solve with a {\color{red} computer}.
 
 What is a computer?
 \end{frame}
@@ -103,7 +114,7 @@ What is a computer?
 \begin{itemize}
     \item What is a computer?
     \item What is a problem?
-    \item How do we measure the difficulty of a problem?
+    \item How do we measure performance?
 \end{itemize}
 \end{frame}
 
@@ -163,13 +174,13 @@ arrows={east:.25cm, west:0.25cm}]
 A Turing Machine $(TM)$ is specified as a tuple of seven components $(Q, \Sigma, \Gamma, q_0, q_{accept}, q_{reject})$:
 
 \begin{itemize}
-    \item $Q$ is the set of all possible states
-    \item $\Sigma$ is the input alphabet for the tape. Note that $\Sigma$ cannot contain the blank symbol $\sqcup$
-    \item $\Gamma$ is tape alphabet, where $\Sigma \subseteq \Gamma$ and $\sqcup \in \Gamma$
-    \item $q_0 \in Q$ is the start state
-    \item $q_{accept} \in Q$ is the accept state
-    \item $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
-    \item $\delta: Q \times \Gamma \to Q \times \Sigma \times \{L, R\}$ is the transition function
+    \item<1-> $Q$ is the set of all possible states
+    \item<2-> $\Sigma$ is the input alphabet for the tape. Note that $\Sigma$ cannot contain the blank symbol $\sqcup$
+    \item<3-> $\Gamma$ is tape alphabet, where $\Sigma \subseteq \Gamma$ and $\sqcup \in \Gamma$
+    \item<4-> $q_0 \in Q$ is the start state
+    \item<5-> $q_{accept} \in Q$ is the accept state
+    \item<6-> $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
+    \item<7-> $\delta: Q \times \Gamma \to Q \times \Sigma \times \{L, R\}$ is the transition function
 \end{itemize}
 \end{frame}
 
@@ -192,9 +203,9 @@ $T = w$ \tcp*{Tape starts as just input, followed by blank cells}
 \frametitle{What happens when it stops?}
 When we reach either the {\em accept} or {\em reject} state, the machine has {\em halted}.
 
-If the machine {\em accepted}, then the machine accepts and the contents of the tape, denoted $M(w)$, is returned.
+If $M$ halts in the accept state, then $M$ accepted the input.
 
-If the machine {\em rejected}, then the machine rejects and nothing is returned.
+If $M$ halts in the reject state, then $M$ rejected the input.
 \end{frame}
 
 \begin{frame}
@@ -243,7 +254,7 @@ This gave way to Universal Turing Machines; machines capable of running any $TM$
 \end{tikzpicture}
 \end{center}
 
-Question: Does $M(01)$ accept or reject?
+Question: Does $M$ accept or reject $01$?
 \end{frame}
 
 \begin{frame}[noframenumbering]
@@ -265,7 +276,7 @@ Question: Does $M(01)$ accept or reject?
 \end{tikzpicture}
 \end{center}
 
-Answer: $M(01)$ accepts!
+Answer: $M$ accepts $01$!
 \end{frame}
 
 \begin{frame}
@@ -287,7 +298,7 @@ Answer: $M(01)$ accepts!
 \end{tikzpicture}
 \end{center}
 
-Question: Does $M(01)$ accept or reject?
+Question: Does $M$ accept or reject $01$?
 \end{frame}
 
 \begin{frame}[noframenumbering]
@@ -309,7 +320,7 @@ Question: Does $M(01)$ accept or reject?
 \end{tikzpicture}
 \end{center}
 
-Answer: $M(01)$ rejects!
+Answer: $M$ rejects $01$!
 \end{frame}
 
 \begin{frame}
@@ -331,7 +342,7 @@ Answer: $M(01)$ rejects!
 \end{tikzpicture}
 \end{center}
 
-Question: Does $M(01)$ accept or reject?
+Question: Does $M$ accept or reject $01$?
 \end{frame}
 
 \begin{frame}[noframenumbering]
@@ -353,7 +364,7 @@ Question: Does $M(01)$ accept or reject?
 \end{tikzpicture}
 \end{center}
 
-Answer: $M(01)$ doesn't halt.
+Answer: $M$ doesn't halt on $01$.
 \end{frame}
 
 \begin{frame}
@@ -363,8 +374,8 @@ You might think it would be useful if we could tell when a machine was going to 
 Formally, we want a $TM\, H$ such that given $TM\, M \text{ and } w \in \Sigma_M^*$:
 
 \begin{itemize}
-    \item $H(M, w)$ halts in the accept state if $M(w)$ halts and
-    \item $H(M, w)$ halts in the reject state if $M(w)$ does not halt.
+    \item $H$ halts in the accept state if $M$ halts on $w$ and
+    \item $H$ halts in the reject state if $M$ does not halt on $w$.
 \end{itemize}
 
 Sadly, Turing proved that such a machine is impossible.
@@ -420,13 +431,13 @@ For any state except the accept state that doesn't have transitions for every sy
 A Nondeterministic Turing Machine $(NTM)$ is specified as a tuple of seven components $(Q, \Sigma, \Gamma, q_0, q_{accept}, q_{reject})$:
 
 \begin{itemize}
-    \item $Q$ is the set of all possible states
-    \item $\Sigma$ is the input alphabet for the tape. Note that $\Sigma$ cannot contain the blank symbol $\sqcup$
-    \item $\Gamma$ is tape alphabet, where $\Sigma \subseteq \Gamma$ and $\sqcup \in \Gamma$
-    \item $q_0 \in Q$ is the start state
-    \item $q_{accept} \in Q$ is the accept state
-    \item $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
-    \item $\delta: Q \times \Gamma \to (Q \times \Sigma \times \{L, R\})^*$ is the transition function
+    \item<1-> $Q$ is the set of all possible states
+    \item<2-> $\Sigma$ is the input alphabet for the tape. Note that $\Sigma$ cannot contain the blank symbol $\sqcup$
+    \item<3-> $\Gamma$ is tape alphabet, where $\Sigma \subseteq \Gamma$ and $\sqcup \in \Gamma$
+    \item<4-> $q_0 \in Q$ is the start state
+    \item<5-> $q_{accept} \in Q$ is the accept state
+    \item<6-> $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
+    \item<7-> $\delta: Q \times \Gamma \to (Q \times \Sigma \times \{L, R\})^+$ is the transition function
 \end{itemize}
 \end{frame}
 
@@ -871,7 +882,7 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \begin{itemize}
     \item What is a computer? {\em Deterministic Turing Machine, Nondeterministic Turing Machine}
     \item What is a problem?
-    \item How do we measure the difficulty of a problem?
+    \item How do we measure performance?
 \end{itemize}
 \end{frame}
 
@@ -889,7 +900,7 @@ Example languages:
     \item Satisfiable boolean expressions
     \item Eulerian graphs
     \item Hamiltonian graphs
-    \item $(M, w)$ such that $M(w)$ halts
+    \item $(M, w)$ such that $M$ halts when given input $w$
 \end{itemize}
 \end{frame}
 
@@ -898,8 +909,8 @@ Example languages:
 A language $L$ is {\em decidable} if there exists a machine $M$ such that:
 
 \begin{itemize}
-    \item $\forall w \in L, M(w) \text{ accepts}$
-    \item $\forall w \notin L, M(w) \text{ rejects}$
+    \item $\forall w \in L, M \text{ accepts } w$
+    \item $\forall w \notin L, M \text{ rejects } w$
 \end{itemize}
 \end{frame}
 
@@ -908,8 +919,8 @@ A language $L$ is {\em decidable} if there exists a machine $M$ such that:
 A language $L$ is {\em verifiable} if there exists a machine $V$ such that:
 
 \begin{itemize}
-    \item $\forall w \in L, \exists c \in \Sigma^* \text{ s.t. } V(w, c) \text{ accepts}$
-    \item $\forall w \notin L, \forall c \in \Sigma^*, V(w, c) \text{ rejects }$
+    \item $\forall w \in L, \exists c \in \Sigma^* \text{ s.t. } V \text{ accepts } (w,c)$
+    \item $\forall w \notin L, \forall c \in \Sigma^*, V \text{ rejects } (w,c)$
 \end{itemize}
 \end{frame}
 
@@ -918,19 +929,19 @@ A language $L$ is {\em verifiable} if there exists a machine $V$ such that:
 \begin{itemize}
     \item What is a computer? {\em Deterministic Turing Machine, Nondeterministic Turing Machine}
     \item What is a problem? {\em Deciding if a word is in a language, verifying that a word is in a language}
-    \item How do we measure the difficulty of a problem?
+    \item How do we measure performance?
 \end{itemize}
 \end{frame}
 
 %------------------------------------------------
-\section{How do we measure the difficulty of a problem?}
+\section{How do we measure performance?}
 %------------------------------------------------
 
 \begin{frame}
 \frametitle{Performance of a machine}
-Problem: We want to talk about how much time it takes for a machine to solve a problem.
+We want to talk about how much time it takes for a machine to solve a problem.
 
-Solution: Assume $\delta$ takes a constant amount of time to run and count the number of times we call $\delta$.
+To do this, we'll assume $\delta$ takes a constant amount of time to run and count the number of times we call $\delta$.
 
 To remain general, we will focus on how the number of times we call $\delta$ scales in the worst case as the input becomes larger.
 
@@ -946,16 +957,20 @@ We can represent this time complexity as a function of the size of the input.
 \frametitle{Solution: Approximate!}
 Let $f$ and $g$ be functions over the real numbers. We say that:
 
-$$f(n) \in O(g(n)) \text{ iff } \exists c > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, f(n) \leq c \cdot g(n)$$
+\begin{itemize}
+\item<1->$f(n) \in O(g(n)) \text{ iff } \exists c > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, f(n) \leq c \cdot g(n)$
 
-$$f(n) \in \Omega(g(n)) \text{ iff } \exists c > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, f(n) \geq c \cdot g(n)$$
+\item<2->$f(n) \in \Omega(g(n)) \text{ iff } \exists c > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, f(n) \geq c \cdot g(n)$
 
-$$f(n) \in \Theta(g(n)) \text{ iff } \exists c_1, c_2 > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n)$$
+\item<3->$f(n) \in \Theta(g(n)) \text{ iff } \exists c_1, c_2 > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n)$
+\end{itemize}
+
+We use this notation, called {\em Big-O}, {\em Big-Omega} and {\em Big-Theta}, to simplify our complexity functions by rounding up for upper bounds (Big-O) and down for lower bounds (Big-Omega).
 \end{frame}
 
 \begin{frame}
 \frametitle{Examples}
-Prove each of the following statements:
+We can use the definitions from before to prove each of the following statements:
 
 $$n \in O(n^2)$$
 $$2^n \in \Omega(n^2)$$
@@ -964,7 +979,7 @@ $$n \in \Theta(2n)$$
 
 \begin{frame}[noframenumbering]
 \frametitle{Examples}
-Prove each of the following statements:
+We can use the definitions from before to prove each of the following statements:
 
 $$n \in O(n^2): c = 1, n_0 = 0$$
 $$2^n \in \Omega(n^2)$$
@@ -973,7 +988,7 @@ $$n \in \Theta(2n)$$
 
 \begin{frame}[noframenumbering]
 \frametitle{Examples}
-Prove each of the following statements:
+We can use the definitions from before to prove each of the following statements:
 
 $$n \in O(n^2): c = 1, n_0 = 0$$
 $$2^n \in \Omega(n^2): c = 1, n_0 = 0$$
@@ -982,7 +997,7 @@ $$n \in \Theta(2n)$$
 
 \begin{frame}[noframenumbering]
 \frametitle{Examples}
-Prove each of the following statements:
+We can use the definitions from before to prove each of the following statements:
 
 $$n \in O(n^2): c = 1, n_0 = 0$$
 $$2^n \in \Omega(n^2): c = 1, n_0 = 0$$
@@ -998,7 +1013,7 @@ $$n \in \Theta(2n): c_1 = 0.5, c_2 = 1, n_0 = 0$$
 \begin{itemize}
     \item What is a computer? {\em Deterministic Turing Machine, Nondeterministic Turing Machine}
     \item What is a problem? {\em Deciding if a word is in a language, verifying that a word is in a language}
-    \item How do we measure the difficulty of a problem? {\em Upper bound of time for an input of length $n$}
+    \item How do we measure performance? {\em Upper bound of time for an input of length $n$}
 \end{itemize}
 \end{frame}
 
@@ -1240,7 +1255,7 @@ And then we run the verifier on every certificate in polynomial time.
 \frametitle{The $P$ versus $NP$ problem}
 Arguably first proposed by G\"{o}del in a letter to von Neumann in 1956.\footnote{\url{https://ecommons.cornell.edu/bitstream/handle/1813/6910/89-994.pdf}}
 
-First stated formally by Cook in 1971.
+Became known as $P$ versus $NP$ after Cook's work in 1971.
 
 Solving the problem will earn you a million dollars, courtesy of the Clay Mathematics Institute.\footnote{\url{http://www.claymath.org/millennium-problems/p-vs-np-problem}}
 \end{frame}
@@ -1253,21 +1268,6 @@ Recall that any $TM$ is by definition nondeterministic.
 Likewise, any polynomial-time $TM$ is also nondeterministic.
 
 Hence $P \subseteq NP$.
-\end{frame}
-
-\begin{frame}
-\frametitle{The easy side: $P \subseteq NP$}
-
-Alternative proof (using verification):
-
-Let $TM\, M$ decide $L$ in polynomial time. Define $V$ as follows:
-
-\begin{algorithm}[H]
-$V(w, c):$\\
-\eIf{$M(w)$ accepts}{{\bf accept}}{{\bf reject}}
-\end{algorithm}
-
-$V$ verifies $L$ in polynomial time. Hence $P \subseteq NP$.
 \end{frame}
 
 \begin{frame}
@@ -1302,17 +1302,25 @@ But how can we determine the hardest problems in $NP$?
 \end{frame}
 
 \begin{frame}
+\frametitle{Polynomial time computable functions}
+
+A function $f:\Sigma^* \to \Sigma^*$ is polynomial time computable if there exists a polynomial time Turing machine $M$ that, when started with input $w$ on its tape, halts with only $f(w)$ on its tape.
+
+\end{frame}
+
+\begin{frame}
 \frametitle{Polynomial time reducible}
 
-Take two languages $A$ and $B$. We say that $A \leq_p B$ iff $\exists TM\, M$ such that:
+Take two languages $A$ and $B$. We say that $A \leq_P B$ if there exists a polynomial time computable function $f$ such that:
 
 \begin{itemize}
-    \item $\forall w \in A, M(w) \in B$
-    \item $\forall w \notin A, M(w) \notin B$
-    \item and $M$ runs in worst-case $O(p(n))$ time for some polynomial $p$, where $n = |w|$
+    \item $\forall w \in A, f(w) \in B$
+    \item $\forall w \notin A, f(w) \notin B$
 \end{itemize}
 
-Note that this property is transitive: $A \leq_p B \text{ and } B \leq_q C \to A \leq_{p + q} C$
+This means that if we have a polynomial time solution for $B$, then we also have a polynomial time solution for $A$.
+
+Note that this property is transitive: If $A \leq_P B \text{ and } B \leq_P C \text{ then } A \leq_P C$
 
 \end{frame}
 
@@ -1323,24 +1331,26 @@ A language $B$ is $NP\text{-Complete}$ iff:
 
 \begin{itemize}
     \item $B \in NP$
-    \item and $\forall A \in NP, A \leq_p B$
+    \item and $\forall A \in NP, A \leq_P B$
 \end{itemize}
 
-If one $NP\text{-Complete}$ language is proven to be in $P$, then every $NP$ problem is also in $P$.
+If one $NP\text{-Complete}$ language is proven to be in $P$, then every $NP$ problem is also in $P$, so $P$ would be equal to $NP$.
 \end{frame}
 
 \begin{frame}
 \frametitle{Problem: There are lots of $NP$ problems}
-We know that any problem in $NP$ can be decided in polynomial time by an $NTM$.
+There are an infinite number of $NP$ problems, so it is impossible to provide a reduction to each individual problem.
+%Note: Said claim might not be true if you are Jeff Dean, see https://www.quora.com/What-are-all-the-Jeff-Dean-facts
+%Note: If you are Jeff Dean, can I have an autograph?
 
-So can we convert an $NTM$ to some other problem?
+So how can we reduce all of them to a specific problem?
 \end{frame}
 
 \begin{frame}
 \frametitle{Satisfiable boolean formulae}
-Take a boolean formula $f = a \vee b \wedge \bar{c}$.
+Take a boolean formula such as $f = a \vee b \wedge \bar{c}$.
 
-We say that $f$ is {\em satisfiable} if we can assign $\bot$ or $\top$ to each variable such that $f = \top$.
+We say that $f$ is {\em satisfiable} (also known as a tautology) if we can assign $\bot$ or $\top$ to each variable such that $f = \top$.
 
 Examples:
 \begin{itemize}
@@ -1356,19 +1366,21 @@ We call $SAT$ the language of all satisfiable boolean formulae.
 $SAT$ can be verified in polynomial time:
 
 \begin{itemize}
-    \item Make the certificate the values we assign to each variable.
-    \item Have $V$ substitute the value for each variable into the formula.
-    \item Accept if the formula evaluates to $\top$, otherwise reject.
+    \item<1-> Make the certificate the values we assign to each variable.
+    \item<2-> Have $V$ substitute the value for each variable into the formula.
+    \item<3-> Accept if the formula evaluates to $\top$, otherwise reject.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Cook-Levin Theorem}
-Cook showed that any $NTM\, M$ that halts in polynomial time running on input $w$ can be converted to a polynomial length boolean formula such that:
+Recall that any language in $NP$ can be decided by an $NTM$ in polynomial time.
+
+Cook showed that any $NTM\, M$ that halts in polynomial time running on input $w$ can be converted in polynomial time to a boolean formula such that:
 
 \begin{itemize}
-    \item If $M(w)$ accepts, then the formula is satisfiable
-    \item and if $M(w)$ rejects, then the formula cannot be satisfied.
+    \item If $M$ accepts $w$, then the formula is satisfiable
+    \item and if $M$ rejects $w$, then the formula cannot be satisfied.
 \end{itemize}
 
 As a result, it was proven that $SAT \in NP\text{-Complete}$.
@@ -1381,12 +1393,7 @@ Now that we have one $NP\text{-Complete}$ problem, proving others is a lot easie
 
 Recall that polynomial-time reducibility is transitive.
 
-So we can now provide a recursive definition. $B \in NP\text{-Complete}$ iff:
-
-\begin{itemize}
-    \item $B = SAT$
-    \item or $B \in NP \text{ and } \exists A \in NP\text{-Complete s.t. } A \leq_p B$
-\end{itemize}
+So now if our problem $B$ is in $NP$ and we can find one problem $A \in NP\text{-Complete}$ such that $A \leq_P B$, then $B \in NP\text{-Complete}$
 \end{frame}
 
 \begin{frame}
@@ -1394,7 +1401,7 @@ So we can now provide a recursive definition. $B \in NP\text{-Complete}$ iff:
 \begin{itemize}
     \item<1-> $3SAT$
     \item<2-> Hamiltonian graphs
-    \item<3-> 0-1 Integer Programming
+    \item<3-> Sudokus
     \item<4-> Knapsack
     \item<5-> Tetris
     \item<6-> Lemmings
@@ -1428,13 +1435,13 @@ Recall our three questions from part one:
 \begin{itemize}
     \item What is a computer?
     \item What is a problem?
-    \item How do we measure the difficulty of a problem?
+    \item How do we measure performance?
 \end{itemize}
 What if we answered these differently?
 \end{frame}
 
 \begin{frame}
-\frametitle{How do we measure the difficulty of a problem?}
+\frametitle{How do we measure performance?}
 Exponential time: $EXP$
 
 Linear time: $LIN$
@@ -1465,8 +1472,24 @@ Time travel: $P_{CTC}$
 \end{frame}
 
 \begin{frame}
-\frametitle{This is only the beginning}
-There are many more complexity classes out there, and very quickly relating them in a simple equation like this:
+\frametitle{Open problems in complexity theory}
+\begin{itemize}
+    \item<1-> Does $P = NP$?
+    \item<2-> Does $L = NL$?
+    \item<3-> Does $BPP = P$?
+    \item<4-> Does $BQP = BPP$?
+    \item<5-> Does $NC = P$?
+    \item<6-> Does $P = PSPACE$?
+    \item<7-> Does $NP = \text{co-}NP$?
+    \item<8-> And lots more...
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Conclusion}
+Complexity theory is a large area about what problems are solvable under different models of a computer and different performance requirements.
+
+There are lots of complexity classes out there -- far more than have been mentioned in this presentation -- and very quickly relating them in a simple equation like this:
 
 $$P \subseteq NP$$
 
@@ -1545,20 +1568,6 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = P_{CTC} \
 \end{tikzpicture}\footnote{\url{http://www.texample.net/tikz/examples/complexity-classes/}}
 \end{frame}
 
-\begin{frame}
-\frametitle{Open problems in complexity theory}
-\begin{itemize}
-    \item<1-> Does $P = NP$?
-    \item<2-> Does $L = NL$?
-    \item<3-> Does $BPP = P$?
-    \item<4-> Does $BQP = BPP$?
-    \item<5-> Does $NC = P$?
-    \item<6-> Does $P = PSPACE$?
-    \item<7-> Does $NP = \text{co-}NP$?
-    \item<8-> And lots more...
-\end{itemize}
-\end{frame}
-
 %------------------------------------------------
 \section{The end}
 %------------------------------------------------
@@ -1584,8 +1593,9 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = P_{CTC} \
 \begin{frame}
 \frametitle{Suggested books}
 \begin{itemize}
-    \item {\em Quantum Computing Since Democritus} by Scott Aaronson offers a broad overview of many complexity classes
     \item {\em Introduction to the Theory of Computation} by Michael Sipser is the recommended textbook for most computability and complexity theory courses
+    \item {\em Computers and Intractability: A Guide to the Theory of NP-Completeness} by Michael R.\@ Garey and David S.\@ Johnson covers a lot about $NP\text{-Complete}$ problems, including a very large collection of $NP\text{-Complete}$ problems.
+    \item {\em Quantum Computing Since Democritus} by Scott Aaronson offers a broad overview of many complexity classes
 \end{itemize}
 \end{frame}
 
@@ -1601,7 +1611,19 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = P_{CTC} \
 \begin{frame}
 \frametitle{Suggested websites}
 \begin{itemize}
-    \item \url{https://complexityzoo.uwaterloo.ca/} is a Wiki originally developed by Scott Aaronson, which provides a list of every complexity class ever stated
+    \item \url{https://complexityzoo.uwaterloo.ca/} is a Wiki originally developed by Scott Aaronson which provides a list of every complexity class ever stated
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proofs for $NP\text{-Complete}$ problems}
+\begin{itemize}
+	\item Takayuki Yato and Takahiro Seta: Complexity and Completeness of Finding Another Solution and Its Application to Puzzles, IEICE TRANSACTIONS on Fundamentals of Electronics, Communications and Computer Sciences, Vol.E86-A, No.5, pp.1052-1060
+	\item  Erik D. Demaine, Susan Hohenberger and David Liben-Nowell: Tetris is Hard, Even to Approximate, \url{http://arxiv.org/abs/cs/0210020}
+	\item Graham Cormode: The Hardness of the Lemmings Game, or Oh no, more NP-Completeness Proofs, Proceedings of the 3rd International Conference on Fun with Algorithms, May 2004, pages 65-76
+	\item Greg Aloupis, Erik D. Demaine, Alan Guo and Giovanni Viglietta: Classic Nintendo Games are (Computationally) Hard, \url{http://arxiv.org/abs/1203.1895}
+	\item Luciano Gualà, Stefano Leucci and Emanuele Natale: Bejeweled, Candy Crush and other Match-Three Games are (NP-)Hard, \url{http://arxiv.org/abs/1403.5830}
+	\item Rapha\"{e}l Clifford, Markus Jalsenius, Ashley Montanaro and Benjamin Sach:  The Complexity of Flood Filling Games, \url{http://arxiv.org/abs/1001.4420}
 \end{itemize}
 \end{frame}
 
