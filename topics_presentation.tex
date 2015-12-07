@@ -34,7 +34,7 @@
 
 \DontPrintSemicolon
 
-\DeclareGraphicsExtensions{.png}
+\DeclareGraphicsExtensions{.png, .pdf}
 
 \setlength{\parskip}{1em}
 
@@ -1397,18 +1397,117 @@ So now if our problem $B$ is in $NP$ and we can find one problem $A \in NP\text{
 \end{frame}
 
 \begin{frame}
+\frametitle{$3SAT$}
+$3SAT$ is a special case of $SAT$ where the boolean statements are of the form:
+
+$$(x_1 \vee y_1 \vee z_1) \wedge (x_2 \vee y_2 \vee z_2) \wedge \dots (x_k \vee y_k \vee z_k)$$
+
+For example: 
+
+$$(x \vee \bar{y} \vee z) \wedge (x \vee y \vee \bar{y}) \wedge (\bar{x} \vee \bar{y} \vee \bar{z}) \wedge (\bar{x} \vee \bar{y} \vee \bar{z})$$
+\end{frame}
+
+\begin{frame}
+\frametitle{$3SAT \in NP\text{-Complete}$}
+$3SAT \in NP$ because $SAT \in NP$ and $3SAT \subset SAT$.
+
+To show that $3SAT$ is $NP\text{-Complete}$, it was first shown that the Cook-Levin theorem could be re-written to be in conjunctive normal form.
+
+For any clauses that contained fewer than $3$ variables, one of the variables is duplicated:
+$$(x \vee y) \to (x \vee y \vee y)$$
+
+For any clauses that contained more than $k > 3$ variables, dummy variables are used to split it up into $k - 2$ clauses with $3$ terms in each:
+
+$$(x_1 \vee x_2 \vee x_3 \vee x_4 \vee x_5) \to (x_1 \vee x_2 \vee a_1) \wedge (\bar{a_1} \vee x_3 \vee a_2) \wedge (\bar{a_2} \vee x_4 \vee x_5)$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Reducing $3SAT$ to another problem}
+\begin{center}
+\includegraphics{platform_framework_np}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Reducing $3SAT$ to another problem}
+To reduce this new problem to another problem, we need to provide implementations for:
+\begin{itemize}
+\item<1-> The start point
+\item<2-> The end point
+\item<3-> The variable points
+\item<4-> The clause points
+\item<5-> The crossover point
+\end{itemize}
+
+Let's look at an example implementation for each of these.
+\end{frame}
+
+\begin{frame}
+\frametitle{Example start point}
+\begin{center}
+\includegraphics[scale=0.4]{mario_start}
+\end{center}
+
+Mario starts by hitting the item box and collecting a mushroom.
+\end{frame}
+
+\begin{frame}
+\frametitle{Example end point}
+\begin{center}
+\includegraphics[scale=0.4]{mario_finish}
+\end{center}
+
+Mario finishes the level by breaking the brick block and reaching the flag.
+\end{frame}
+
+\begin{frame}
+\frametitle{Example variable point}
+\begin{center}
+\includegraphics[scale=0.3]{mario_var}
+\end{center}
+
+Mario must decide which of the two paths at the bottom to go down.
+\end{frame}
+
+\begin{frame}
+\frametitle{Example clause point}
+\begin{center}
+\includegraphics[scale=0.3]{mario_clause}
+\end{center}
+
+The three item boxes contain invincibility stars. If Mario hits one of them during the decision stage then he can grab the star during the clause check and run through the fire.
+\end{frame}
+
+\begin{frame}
+\frametitle{Example crossover point}
+\begin{columns}
+\column{0.4\linewidth}
+\includegraphics[scale=0.25]{mario_xover_smb}
+\column{0.6\linewidth}
+Going from left to right, Mario must take damage from the goomba to become small, fit over and under the gaps, and collect another mushroom from the item box.
+
+Going from bottom to top, Mario must break one brick on the lower platform and two bricks on the upper platform to jump up.
+
+Small Mario cannot break bricks, so he cannot go from left to top. Tall Mario cannot fit in small gaps, so he cannot go from bottom to right.
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Therefore}
+$$Super Mario Brothers \in NP\text{-Complete}$$
+\end{frame}
+
+\begin{frame}
 \frametitle{Other $NP\text{-Complete}$ problems}
 \begin{itemize}
-    \item<1-> $3SAT$
-    \item<2-> Hamiltonian graphs
-    \item<3-> Sudokus
-    \item<4-> Knapsack
-    \item<5-> Tetris
-    \item<6-> Lemmings
-    \item<7-> Super Mario Bros
-    \item<8-> Bejeweled
-    \item<9-> Candy Crush Saga
-    \item<10-> Flood-It
+    \item<1-> Hamiltonian graphs
+    \item<2-> Sudokus
+    \item<3-> Knapsack
+    \item<4-> Tetris
+    \item<5-> Lemmings
+    \item<6-> Bejeweled
+    \item<7-> Candy Crush Saga
+    \item<8-> Flood-It
 \end{itemize}
 \end{frame}
 
@@ -1441,14 +1540,17 @@ What if we answered these differently?
 \end{frame}
 
 \begin{frame}
-\frametitle{How do we measure performance?}
+\frametitle{Different restrictions on time}
 Exponential time: $EXP$
 
 Linear time: $LIN$
+\end{frame}
 
+\begin{frame}
+\frametitle{How do we measure performance?}
 Space complexity: $PSPACE, EXPSPACE$
 
-Sublinear working space: $L$
+Working space: $L$
 \end{frame}
 
 \begin{frame}
@@ -1605,6 +1707,7 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = P_{CTC} \
     \item {\em On Computable Numbers, with an Application to the Entscheidungsproblem} by Alan Turing is Turing's PhD thesis, which provides the original definition of Turing Machines, a formal definition of the Universal Turing Machine, and a proof that the Halting problem is undecidable
     \item {\em The Complexity of Theorem Proving Procedures} by Stephen Cook provides the proof that $SAT \in NP\text{-Complete}$
     \item {\em Reducibility Among Combinatorial Problems} by Richard Karp provides 21 of the earliest problems proven to be $NP\text{-Complete}$
+    \item {\em Classic Nintendo Games are (Computationally) Hard} by Greg Aloupis, Erik D. Demaine, Alan Guo and Giovanni Viglietta proved that $SuperMarioBrothers$ along with other games are $NP\text{-Complete}$
 \end{itemize}
 \end{frame}
 
@@ -1621,7 +1724,6 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = P_{CTC} \
 	\item Takayuki Yato and Takahiro Seta: Complexity and Completeness of Finding Another Solution and Its Application to Puzzles, IEICE TRANSACTIONS on Fundamentals of Electronics, Communications and Computer Sciences, Vol.E86-A, No.5, pp.1052-1060
 	\item  Erik D. Demaine, Susan Hohenberger and David Liben-Nowell: Tetris is Hard, Even to Approximate, \url{http://arxiv.org/abs/cs/0210020}
 	\item Graham Cormode: The Hardness of the Lemmings Game, or Oh no, more NP-Completeness Proofs, Proceedings of the 3rd International Conference on Fun with Algorithms, May 2004, pages 65-76
-	\item Greg Aloupis, Erik D. Demaine, Alan Guo and Giovanni Viglietta: Classic Nintendo Games are (Computationally) Hard, \url{http://arxiv.org/abs/1203.1895}
 	\item Luciano Gualà, Stefano Leucci and Emanuele Natale: Bejeweled, Candy Crush and other Match-Three Games are (NP-)Hard, \url{http://arxiv.org/abs/1403.5830}
 	\item Rapha\"{e}l Clifford, Markus Jalsenius, Ashley Montanaro and Benjamin Sach:  The Complexity of Flood Filling Games, \url{http://arxiv.org/abs/1001.4420}
 \end{itemize}
