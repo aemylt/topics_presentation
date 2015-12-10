@@ -47,6 +47,7 @@
 \author{Dominic Moylett} % Your name
 \institute[University of Bristol] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
+Quantum Engineering CDT\\
 University of Bristol \\ % Your institution for the title page
 \medskip
 \textit{dominic.moylett@bristol.ac.uk} % Your email address
@@ -192,7 +193,7 @@ $q = q_0$\\
 $h = 0$\\
 $T = w$ \tcp*{Tape starts as just input, followed by blank cells}
 \While{$q \notin \{q_{accept}, q_{reject}\}$}{
-    $(q, h, i) = \delta(q, T_h)$\\
+    $(q, T_h, i) = \delta(q, T_h)$\\
     \eIf{$i = L$}{$h = h - 1$ \tcp*{Move tape head to the left}}
     {$h = h + 1$ \tcp*{Move tape head to the right}}
 }
@@ -378,9 +379,30 @@ Formally, we want a $TM\, H$ such that given $TM\, M \text{ and } w \in \Sigma_M
     \item $H$ halts in the reject state if $M$ does not halt on $w$.
 \end{itemize}
 
-Sadly, Turing proved that such a machine is impossible.
+\end{frame}
 
-There are many other unsolvable problems as well, within the area of {\bf computability theory}. We will not cover this area, but some reading on the subject is suggested at the end.
+\begin{frame}
+\frametitle{The halting problem}
+
+Assume $H$ exists. Let's build another machine $H'$ which starts with a machine $M$ on its tape.
+
+$H'$ is described as follows:
+\begin{algorithm}[H]
+\eIf{$H$ accepts $(M, M)$}{go into an infinite loop}
+{accept}
+\end{algorithm}
+
+What happens if we run $H'$ on $H'$?
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The halting problem}
+
+$H$ cannot determine whether or not $H'$ halts on $H'$, so it is impossible to define a machine that halts on every input.
+
+There are many other unsolvable problems as well within the area of {\bf computability theory}. We will not cover this area, but some reading on the subject is suggested at the end.
+
 \end{frame}
 
 \begin{frame}
