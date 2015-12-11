@@ -172,7 +172,7 @@ arrows={east:.25cm, west:0.25cm}]
 
 \begin{frame}
 \frametitle{Formal definition of a computer}
-A Turing Machine $(TM)$ is specified as a tuple of seven components $(Q, \Sigma, \Gamma, q_0, q_{accept}, q_{reject})$:
+A Turing Machine $(TM)$ is specified as a tuple of seven components $(Q, \Sigma, \Gamma, q_0, q_{accept}, q_{reject}, \delta)$:
 
 \begin{itemize}
     \item<1-> $Q$ is the set of all possible states
@@ -450,7 +450,7 @@ For any state except the accept state that doesn't have transitions for every sy
 
 \begin{frame}
 \frametitle{Nondeterminism: Spot the difference!}
-A Nondeterministic Turing Machine $(NTM)$ is specified as a tuple of seven components $(Q, \Sigma, \Gamma, q_0, q_{accept}, q_{reject})$:
+A Nondeterministic Turing Machine $(NTM)$ is specified as a tuple of seven components $(Q, \Sigma, \Gamma, q_0, q_{accept}, q_{reject}, \delta)$:
 
 \begin{itemize}
     \item<1-> $Q$ is the set of all possible states
