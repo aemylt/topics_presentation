@@ -263,7 +263,7 @@ Question: Does $M$ accept or reject $01$?
 
 \begin{center}
 \begin{tikzpicture}[node distance=3cm,on grid,auto]
-    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
     \node[state] (q1) [right of=q0] {$q_1$};
     \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
     \node[state] (qreject) [below of=q1] {$q_{reject}$};
@@ -274,6 +274,144 @@ Question: Does $M$ accept or reject $01$?
         (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
         (q1) edge node[sloped, anchor=north] {$0 \to (1, R)$} (qreject)
         (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge node {$\mathbf{0 \to (0, R)}$} (q1)
+        (q1) edge node {$1 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$0 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$1 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$0 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$\mathbf{1 \to (0, R)}$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$0 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$\mathbf{q_{accept}}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$1 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$0 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{\sqcup}$};
+\end{scope}
 \end{tikzpicture}
 \end{center}
 
@@ -307,7 +445,7 @@ Question: Does $M$ accept or reject $01$?
 
 \begin{center}
 \begin{tikzpicture}[node distance=3cm,on grid,auto]
-    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
     \node[state] (q1) [right of=q0] {$q_1$};
     \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
     \node[state] (qreject) [below of=q1] {$q_{reject}$};
@@ -318,6 +456,144 @@ Question: Does $M$ accept or reject $01$?
         (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
         (q1) edge node[sloped, anchor=north] {$1 \to (1, R)$} (qreject)
         (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge node {$\mathbf{0 \to (0, R)}$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$1 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$1 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$\mathbf{1 \to (1, R)}$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$\mathbf{q_{reject}}$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge node[sloped, anchor=north] {$1 \to (1, R)$} (qreject)
+        (q1) edge[bend left, sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\mathbf{\sqcup}$};
+\end{scope}
 \end{tikzpicture}
 \end{center}
 
@@ -351,7 +627,7 @@ Question: Does $M$ accept or reject $01$?
 
 \begin{center}
 \begin{tikzpicture}[node distance=3cm,on grid,auto]
-    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
     \node[state] (q1) [right of=q0] {$q_1$};
     \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
     \node[state] (qreject) [below of=q1] {$q_{reject}$};
@@ -362,6 +638,528 @@ Question: Does $M$ accept or reject $01$?
         (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
         (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
         (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$\mathbf{0 \to (0, R)}$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$\mathbf{1 \to (1, L)}$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$\mathbf{0 \to (0, R)}$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$\mathbf{1 \to (1, L)}$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$\mathbf{0 \to (0, R)}$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$\mathbf{1 \to (1, L)}$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$\mathbf{0 \to (0, R)}$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$\mathbf{q_1}$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$\mathbf{1 \to (1, L)}$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$0$};
+	\node [on chain=1,tmtape] {$\mathbf{1}$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Question: Does $M$ accept or reject $01$?
+\end{frame}
+
+\begin{frame}[noframenumbering]
+\frametitle{Quiz Time!}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$\mathbf{q_0}$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \node[state] (qreject) [below of=q1] {$q_{reject}$};
+    \path[->]
+        (q0) edge[anchor=north] node {$0 \to (0, R)$} (q1)
+        (q1) edge node {$0 \to (0, R)$} (qaccept)
+        (q0) edge node[sloped, anchor=south] {$1 \to (1, R)$} (qreject)
+        (q0) edge[bend right, sloped, anchor=north] node {$\sqcup \to (\sqcup, R)$} (qreject)
+        (q1) edge[bend right, anchor=south] node {$1 \to (1, L)$} (q0)
+        (q1) edge[sloped, anchor=south] node {$\sqcup \to (\sqcup, R)$} (qreject);
+
+\edef\sizetape{0.7cm}
+\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+
+%% Draw TM tape
+\begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
+	\node [on chain=1,tmtape] {$\mathbf{0}$};
+	\node [on chain=1,tmtape] {$1$};
+	\node [on chain=1,tmtape] {$\sqcup$};
+\end{scope}
 \end{tikzpicture}
 \end{center}
 
@@ -396,10 +1194,25 @@ What happens if we run $H'$ on $H'$?
 
 \end{frame}
 
+\begin{frame}[noframenumbering]
+\frametitle{The halting problem}
+
+Assume $H$ exists. Let's build another machine $H'$ which starts with a machine $M$ on its tape.
+
+$H'$ is described as follows:
+\begin{algorithm}[H]
+\eIf{$H$ accepts $(H', H')$}{go into an infinite loop \tcp*{Doesn't halt even though $H$ says we should halt}}
+{accept \tcp*{Halts even though $H$ says we shouldn't halt}}
+\end{algorithm}
+
+What happens if we run $H'$ on $H'$?
+
+\end{frame}
+
 \begin{frame}
 \frametitle{The halting problem}
 
-$H$ cannot determine whether or not $H'$ halts on $H'$, so it is impossible to define a machine that halts on every input.
+$H$ cannot determine whether or not $H'$ halts on $H'$, so $H$ does not solve the halting problem for every possible machine and input. Thus the halting problem cannot be solved by a $TM$.
 
 There are many other unsolvable problems as well within the area of {\bf computability theory}. We will not cover this area, but some reading on the subject is suggested at the end.
 
