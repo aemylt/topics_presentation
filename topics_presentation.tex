@@ -472,6 +472,18 @@ In deterministic $TMs$, the transition goes from one machine setup to another.
 In $NTM$s, the transition function goes from one to many setups.
 
 These setups are run simultaneously, and the machine accepts if one setup halts in an accepting state, or rejects if all setups halt in the rejecting state.
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (q0) at (0,0) {$q_0$};
+    \node[state] (q1) [right of=q0] {$q_1$};
+    \node[accepting,state] (qaccept) [right of=q1] {$q_{accept}$};
+    \path[->]
+        (q0) edge node {$0 \to (0, R)$} (q1)
+        (q0) edge[loop left] node {$0 \to (0, R)$} (q0)
+        (q1) edge node {$1 \to (0, R)$} (qaccept);
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 \begin{frame}
