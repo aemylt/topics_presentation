@@ -1177,6 +1177,18 @@ Formally, we want a $TM\, H$ such that given $TM\, M \text{ and } w \in \Sigma_M
     \item $H$ halts in the reject state if $M$ does not halt on $w$.
 \end{itemize}
 
+\begin{center}
+\begin{tikzpicture}[node distance=3cm,on grid,auto]
+    \node[state] (qreject) at (0,0) {$q_{reject}$};
+    \node[state] (q0) [right of=qreject] {$q_0$};
+    \node[accepting,state] (qaccept) [right of=q0] {$q_{accept}$};
+    \path[->]
+        (q0) edge [anchor=south] node {$0 \to (0, R)$} (qreject)
+        (q0) edge [loop above] node {$\sqcup \to (\sqcup, R)$} (q0)
+        (q0) edge node {$1 \to (1, R)$} (qaccept);
+\end{tikzpicture}
+\end{center}
+
 \end{frame}
 
 \begin{frame}
