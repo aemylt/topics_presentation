@@ -25,6 +25,7 @@
 4-
 -45
 -4.5
+-5
 5-
 .5cm
 -6
@@ -34,6 +35,7 @@
 7-
 -8
 8-
+8cm
 -9
 9-
 -9.5
@@ -41,6 +43,7 @@ Aaronson
 Aloupis
 .append
 Bejeweled
+Bueller
 center
 Cormode
 del

@@ -52,7 +52,7 @@ University of Bristol \\ % Your institution for the title page
 \medskip
 \textit{\href{mailto:dominic.moylett@bristol.ac.uk}{dominic.moylett@bristol.ac.uk}} % Your email address
 }
-\date{\today} % Date, can be changed to a custom date
+\date{$15$th December, $2015$} % Date, can be changed to a custom date
 
 \begin{document}
 
@@ -68,8 +68,8 @@ University of Bristol \\ % Your institution for the title page
 \frametitle{Summary of Presentation}
 This presentation will consist of two parts:
 \begin{itemize}
-	\item Part one will look at the building blocks of complexity classes
-	\item And part two will look at the consequences of the complexity classes we defined
+    \item Part one will look at the building blocks of complexity classes
+    \item And part two will look at the consequences of the complexity classes we defined
 \end{itemize}
 
 We'll finish by exploring other aspects of complexity theory, and giving examples of other complexity classes and open problems out there.
@@ -181,17 +181,17 @@ A Turing Machine $(TM)$ is specified as a tuple of seven components $(Q, \Sigma,
     \item<4-> $q_0 \in Q$ is the start state
     \item<5-> $q_{accept} \in Q$ is the accept state
     \item<6-> $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
-    \item<7-> $\delta: Q \times \Gamma \to Q \times \Sigma \times \{L, R\}$ is the transition function
+    \item<7-> $\delta: Q \times \Gamma \to Q \times \Gamma \times \{L, R\}$ is the transition function
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{But how do we run it?}
-The majority of computation time is spent repeating the following loop. Note that $T_h$ is the $h$-th cell of the tape.
+The majority of computation time is spent repeating the following loop. Note that $T_h$ is the $h$-th cell of the tape and $w \in \Sigma^*$ is the input we give the machine.
 \begin{algorithm}[H]
 $q = q_0$\\
 $h = 0$\\
-$T = w$ \tcp*{Tape starts as just input, followed by blank cells}
+$T = w||\sqcup^n$ \tcp*{Tape starts as just input, followed by blank cells}
 \While{$q \notin \{q_{accept}, q_{reject}\}$}{
     $(q, T_h, i) = \delta(q, T_h)$\\
     \eIf{$i = L$}{$h = h - 1$ \tcp*{Move tape head to the left}}
@@ -280,9 +280,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -312,9 +312,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -344,9 +344,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -376,9 +376,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -408,9 +408,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{\sqcup}$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{\sqcup}$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -462,9 +462,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -494,9 +494,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -526,9 +526,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -558,9 +558,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -590,9 +590,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\mathbf{\sqcup}$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\mathbf{\sqcup}$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -644,9 +644,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -676,9 +676,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -708,9 +708,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -740,9 +740,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -772,9 +772,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -804,9 +804,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -836,9 +836,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -868,9 +868,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -900,9 +900,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -932,9 +932,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -964,9 +964,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -996,9 +996,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -1028,9 +1028,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -1060,9 +1060,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -1092,9 +1092,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -1124,9 +1124,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$0$};
-	\node [on chain=1,tmtape] {$\mathbf{1}$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$0$};
+    \node [on chain=1,tmtape] {$\mathbf{1}$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -1156,9 +1156,9 @@ Question: Does $M$ accept or reject $01$?
 
 %% Draw TM tape
 \begin{scope}[shift={(8cm,0cm)},start chain=1 going right,node distance=0.7cm]
-	\node [on chain=1,tmtape] {$\mathbf{0}$};
-	\node [on chain=1,tmtape] {$1$};
-	\node [on chain=1,tmtape] {$\sqcup$};
+    \node [on chain=1,tmtape] {$\mathbf{0}$};
+    \node [on chain=1,tmtape] {$1$};
+    \node [on chain=1,tmtape] {$\sqcup$};
 \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -1184,7 +1184,7 @@ Formally, we want a $TM\, H$ such that given $TM\, M \text{ and } w \in \Sigma_M
     \node[accepting,state] (qaccept) [right of=q0] {$q_{accept}$};
     \path[->]
         (q0) edge [anchor=south] node {$0 \to (0, R)$} (qreject)
-        (q0) edge [loop above] node {$\sqcup \to (\sqcup, R)$} (q0)
+        (q0) edge [loop above] node {$\sqcup \to (0, R)$} (q0)
         (q0) edge node {$1 \to (1, R)$} (qaccept);
 \end{tikzpicture}
 \end{center}
@@ -1226,7 +1226,7 @@ What happens if we run $H'$ on $H'$?
 
 $H$ cannot determine whether or not $H'$ halts on $H'$, so $H$ does not solve the halting problem for every possible machine and input. Thus the halting problem cannot be solved by a $TM$.
 
-There are many other unsolvable problems as well within the area of {\bf computability theory}. We will not cover this area, but some reading on the subject is suggested at the end.
+There are many other unsolvable problems as well within the area of {\bf computability theory}.
 
 \end{frame}
 
@@ -1284,7 +1284,7 @@ A Nondeterministic Turing Machine $(NTM)$ is specified as a tuple of seven compo
     \item<4-> $q_0 \in Q$ is the start state
     \item<5-> $q_{accept} \in Q$ is the accept state
     \item<6-> $q_{reject} \in Q$ is the reject state, where $q_{reject} \neq q_{accept}$
-    \item<7-> $\delta: Q \times \Gamma \to (Q \times \Sigma \times \{L, R\})^+$ is the transition function
+    \item<7-> $\delta: Q \times \Gamma \to (Q \times \Gamma \times \{L, R\})^+$ is the transition function
 \end{itemize}
 \end{frame}
 
@@ -1315,37 +1315,37 @@ These setups are run simultaneously, and the machine accepts if one setup halts 
 \frametitle{Computation Tree}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s3) at (-2,-2) {$s_3$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\node[state] (s5) at (3,-2) {$s_5$};
-	\node[state] (s6) at (-3,-3) {$s_6$};
-	\node[state] (s7) at (-1,-3) {$s_7$};
-	\node[state] (s8) at (0,-3) {$s_8$};
-	\node[state, accepting] (s9) at (2,-3) {$s_9$};
-	\node[state] (s10) at (3,-3) {$s_{10}$};
-	\node[state] (s11) at (-3,-4) {$s_{11}$};
-	\node[state] (s12) at (-1,-4) {$s_{12}$};
-	\node[state] (s13) at (1,-4) {$s_{13}$};
-	\node[state] (s14) at (3,-4) {$s_{14}$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s0) edge node {} (s2)
-		(s1) edge node {} (s3)
-		(s2) edge node {} (s4)
-		(s2) edge node {} (s5)
-		(s3) edge node {} (s6)
-		(s3) edge node {} (s7)
-		(s4) edge node {} (s8)
-		(s4) edge node {} (s9)
-		(s5) edge node {} (s10)
-		(s6) edge node {} (s11)
-		(s8) edge node {} (s12)
-		(s8) edge node {} (s13)
-		(s10) edge node {} (s14);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s3) at (-2,-2) {$s_3$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \node[state] (s5) at (3,-2) {$s_5$};
+    \node[state] (s6) at (-3,-3) {$s_6$};
+    \node[state] (s7) at (-1,-3) {$s_7$};
+    \node[state] (s8) at (0,-3) {$s_8$};
+    \node[state, accepting] (s9) at (2,-3) {$s_9$};
+    \node[state] (s10) at (3,-3) {$s_{10}$};
+    \node[state] (s11) at (-3,-4) {$s_{11}$};
+    \node[state] (s12) at (-1,-4) {$s_{12}$};
+    \node[state] (s13) at (1,-4) {$s_{13}$};
+    \node[state] (s14) at (3,-4) {$s_{14}$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s0) edge node {} (s2)
+        (s1) edge node {} (s3)
+        (s2) edge node {} (s4)
+        (s2) edge node {} (s5)
+        (s3) edge node {} (s6)
+        (s3) edge node {} (s7)
+        (s4) edge node {} (s8)
+        (s4) edge node {} (s9)
+        (s5) edge node {} (s10)
+        (s6) edge node {} (s11)
+        (s8) edge node {} (s12)
+        (s8) edge node {} (s13)
+        (s10) edge node {} (s14);
 \end{tikzpicture}
 \end{center}
 
@@ -1357,15 +1357,15 @@ Vertices are single setups (current state, tape contents and head position) for 
 Any $TM$ is by definition also an $NTM$. The computation tree for a $TM$ looks like this:
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (0,-1) {$s_1$};
-	\node[state] (s2) at (0,-2) {$s_2$};
-	\node[state, accepting] (s3) at (0,-3) {$s_3$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s1) edge node {} (s2)
-		(s2) edge node {} (s3);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (0,-1) {$s_1$};
+    \node[state] (s2) at (0,-2) {$s_2$};
+    \node[state, accepting] (s3) at (0,-3) {$s_3$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s1) edge node {} (s2)
+        (s2) edge node {} (s3);
 \end{tikzpicture}
 \end{center}
 
@@ -1376,37 +1376,37 @@ Question: Is there any problem that can be solved by an $NTM$ that cannot be sol
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s3) at (-2,-2) {$s_3$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\node[state] (s5) at (3,-2) {$s_5$};
-	\node[state] (s6) at (-3,-3) {$s_6$};
-	\node[state] (s7) at (-1,-3) {$s_7$};
-	\node[state] (s8) at (0,-3) {$s_8$};
-	\node[state, accepting] (s9) at (2,-3) {$s_9$};
-	\node[state] (s10) at (3,-3) {$s_{10}$};
-	\node[state] (s11) at (-3,-4) {$s_{11}$};
-	\node[state] (s12) at (-1,-4) {$s_{12}$};
-	\node[state] (s13) at (1,-4) {$s_{13}$};
-	\node[state] (s14) at (3,-4) {$s_{14}$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s0) edge node {} (s2)
-		(s1) edge node {} (s3)
-		(s2) edge node {} (s4)
-		(s2) edge node {} (s5)
-		(s3) edge node {} (s6)
-		(s3) edge node {} (s7)
-		(s4) edge node {} (s8)
-		(s4) edge node {} (s9)
-		(s5) edge node {} (s10)
-		(s6) edge node {} (s11)
-		(s8) edge node {} (s12)
-		(s8) edge node {} (s13)
-		(s10) edge node {} (s14);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s3) at (-2,-2) {$s_3$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \node[state] (s5) at (3,-2) {$s_5$};
+    \node[state] (s6) at (-3,-3) {$s_6$};
+    \node[state] (s7) at (-1,-3) {$s_7$};
+    \node[state] (s8) at (0,-3) {$s_8$};
+    \node[state, accepting] (s9) at (2,-3) {$s_9$};
+    \node[state] (s10) at (3,-3) {$s_{10}$};
+    \node[state] (s11) at (-3,-4) {$s_{11}$};
+    \node[state] (s12) at (-1,-4) {$s_{12}$};
+    \node[state] (s13) at (1,-4) {$s_{13}$};
+    \node[state] (s14) at (3,-4) {$s_{14}$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s0) edge node {} (s2)
+        (s1) edge node {} (s3)
+        (s2) edge node {} (s4)
+        (s2) edge node {} (s5)
+        (s3) edge node {} (s6)
+        (s3) edge node {} (s7)
+        (s4) edge node {} (s8)
+        (s4) edge node {} (s9)
+        (s5) edge node {} (s10)
+        (s6) edge node {} (s11)
+        (s8) edge node {} (s12)
+        (s8) edge node {} (s13)
+        (s10) edge node {} (s14);
 \end{tikzpicture}
 \end{center}
 
@@ -1417,13 +1417,13 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\edef\sizetape{0.7cm}
-	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+    \edef\sizetape{0.7cm}
+    \tikzstyle{tmtape}=[draw,minimum size=\sizetape]
 
-	%% Draw TM tape
-	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
-	    \node [on chain=1,tmtape] {$s_0$};
-	\end{scope}
+    %% Draw TM tape
+    \begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+        \node [on chain=1,tmtape] {$s_0$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -1432,17 +1432,17 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
 
-	\edef\sizetape{0.7cm}
-	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+    \edef\sizetape{0.7cm}
+    \tikzstyle{tmtape}=[draw,minimum size=\sizetape]
 
-	%% Draw TM tape
-	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
-	    \node [on chain=1,tmtape] {$s_1$};
-	    \node [on chain=1,tmtape] {$s_2$};
-	\end{scope}
+    %% Draw TM tape
+    \begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+        \node [on chain=1,tmtape] {$s_1$};
+        \node [on chain=1,tmtape] {$s_2$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -1451,20 +1451,20 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\path[->]
-		(s0) edge node {} (s1);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \path[->]
+        (s0) edge node {} (s1);
 
-	\edef\sizetape{0.7cm}
-	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+    \edef\sizetape{0.7cm}
+    \tikzstyle{tmtape}=[draw,minimum size=\sizetape]
 
-	%% Draw TM tape
-	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
-	    \node [on chain=1,tmtape] {$s_2$};
-	    \node [on chain=1,tmtape] {$s_3$};
-	\end{scope}
+    %% Draw TM tape
+    \begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+        \node [on chain=1,tmtape] {$s_2$};
+        \node [on chain=1,tmtape] {$s_3$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -1473,23 +1473,23 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s0) edge node {} (s2);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s0) edge node {} (s2);
 
-	\edef\sizetape{0.7cm}
-	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+    \edef\sizetape{0.7cm}
+    \tikzstyle{tmtape}=[draw,minimum size=\sizetape]
 
-	%% Draw TM tape
-	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
-	    \node [on chain=1,tmtape] {$s_3$};
-	    \node [on chain=1,tmtape] {$s_4$};
-	    \node [on chain=1,tmtape] {$s_5$};
-	\end{scope}
+    %% Draw TM tape
+    \begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+        \node [on chain=1,tmtape] {$s_3$};
+        \node [on chain=1,tmtape] {$s_4$};
+        \node [on chain=1,tmtape] {$s_5$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -1498,26 +1498,26 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s3) at (-2,-2) {$s_3$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s0) edge node {} (s2)
-		(s1) edge node {} (s3);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s3) at (-2,-2) {$s_3$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s0) edge node {} (s2)
+        (s1) edge node {} (s3);
 
-	\edef\sizetape{0.7cm}
-	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+    \edef\sizetape{0.7cm}
+    \tikzstyle{tmtape}=[draw,minimum size=\sizetape]
 
-	%% Draw TM tape
-	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
-	    \node [on chain=1,tmtape] {$s_4$};
-	    \node [on chain=1,tmtape] {$s_5$};
-	    \node [on chain=1,tmtape] {$s_6$};
-	    \node [on chain=1,tmtape] {$s_7$};
-	\end{scope}
+    %% Draw TM tape
+    \begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+        \node [on chain=1,tmtape] {$s_4$};
+        \node [on chain=1,tmtape] {$s_5$};
+        \node [on chain=1,tmtape] {$s_6$};
+        \node [on chain=1,tmtape] {$s_7$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -1526,29 +1526,29 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s3) at (-2,-2) {$s_3$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s0) edge node {} (s2)
-		(s1) edge node {} (s3)
-		(s2) edge node {} (s4);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s3) at (-2,-2) {$s_3$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s0) edge node {} (s2)
+        (s1) edge node {} (s3)
+        (s2) edge node {} (s4);
 
-	\edef\sizetape{0.7cm}
-	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+    \edef\sizetape{0.7cm}
+    \tikzstyle{tmtape}=[draw,minimum size=\sizetape]
 
-	%% Draw TM tape
-	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
-	    \node [on chain=1,tmtape] {$s_5$};
-	    \node [on chain=1,tmtape] {$s_6$};
-	    \node [on chain=1,tmtape] {$s_7$};
-	    \node [on chain=1,tmtape] {$s_8$};
-	    \node [on chain=1,tmtape] {$s_9$};
-	\end{scope}
+    %% Draw TM tape
+    \begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+        \node [on chain=1,tmtape] {$s_5$};
+        \node [on chain=1,tmtape] {$s_6$};
+        \node [on chain=1,tmtape] {$s_7$};
+        \node [on chain=1,tmtape] {$s_8$};
+        \node [on chain=1,tmtape] {$s_9$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -1557,31 +1557,31 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s3) at (-2,-2) {$s_3$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\node[state] (s5) at (3,-2) {$s_5$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s0) edge node {} (s2)
-		(s1) edge node {} (s3)
-		(s2) edge node {} (s4)
-		(s2) edge node {} (s5);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s3) at (-2,-2) {$s_3$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \node[state] (s5) at (3,-2) {$s_5$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s0) edge node {} (s2)
+        (s1) edge node {} (s3)
+        (s2) edge node {} (s4)
+        (s2) edge node {} (s5);
 
-	\edef\sizetape{0.7cm}
-	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+    \edef\sizetape{0.7cm}
+    \tikzstyle{tmtape}=[draw,minimum size=\sizetape]
 
-	%% Draw TM tape
-	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
-	    \node [on chain=1,tmtape] {$s_6$};
-	    \node [on chain=1,tmtape] {$s_7$};
-	    \node [on chain=1,tmtape] {$s_8$};
-	    \node [on chain=1,tmtape] {$s_9$};
-	    \node [on chain=1,tmtape] {$s_{10}$};
-	\end{scope}
+    %% Draw TM tape
+    \begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+        \node [on chain=1,tmtape] {$s_6$};
+        \node [on chain=1,tmtape] {$s_7$};
+        \node [on chain=1,tmtape] {$s_8$};
+        \node [on chain=1,tmtape] {$s_9$};
+        \node [on chain=1,tmtape] {$s_{10}$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -1590,33 +1590,33 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s3) at (-2,-2) {$s_3$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\node[state] (s5) at (3,-2) {$s_5$};
-	\node[state] (s6) at (-3,-3) {$s_6$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s0) edge node {} (s2)
-		(s1) edge node {} (s3)
-		(s2) edge node {} (s4)
-		(s2) edge node {} (s5)
-		(s3) edge node {} (s6);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s3) at (-2,-2) {$s_3$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \node[state] (s5) at (3,-2) {$s_5$};
+    \node[state] (s6) at (-3,-3) {$s_6$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s0) edge node {} (s2)
+        (s1) edge node {} (s3)
+        (s2) edge node {} (s4)
+        (s2) edge node {} (s5)
+        (s3) edge node {} (s6);
 
-	\edef\sizetape{0.7cm}
-	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+    \edef\sizetape{0.7cm}
+    \tikzstyle{tmtape}=[draw,minimum size=\sizetape]
 
-	%% Draw TM tape
-	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
-	    \node [on chain=1,tmtape] {$s_7$};
-	    \node [on chain=1,tmtape] {$s_8$};
-	    \node [on chain=1,tmtape] {$s_9$};
-	    \node [on chain=1,tmtape] {$s_{10}$};
-	    \node [on chain=1,tmtape] {$s_{11}$};
-	\end{scope}
+    %% Draw TM tape
+    \begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+        \node [on chain=1,tmtape] {$s_7$};
+        \node [on chain=1,tmtape] {$s_8$};
+        \node [on chain=1,tmtape] {$s_9$};
+        \node [on chain=1,tmtape] {$s_{10}$};
+        \node [on chain=1,tmtape] {$s_{11}$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -1625,34 +1625,34 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s3) at (-2,-2) {$s_3$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\node[state] (s5) at (3,-2) {$s_5$};
-	\node[state] (s6) at (-3,-3) {$s_6$};
-	\node[state] (s7) at (-1,-3) {$s_7$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s0) edge node {} (s2)
-		(s1) edge node {} (s3)
-		(s2) edge node {} (s4)
-		(s2) edge node {} (s5)
-		(s3) edge node {} (s6)
-		(s3) edge node {} (s7);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s3) at (-2,-2) {$s_3$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \node[state] (s5) at (3,-2) {$s_5$};
+    \node[state] (s6) at (-3,-3) {$s_6$};
+    \node[state] (s7) at (-1,-3) {$s_7$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s0) edge node {} (s2)
+        (s1) edge node {} (s3)
+        (s2) edge node {} (s4)
+        (s2) edge node {} (s5)
+        (s3) edge node {} (s6)
+        (s3) edge node {} (s7);
 
-	\edef\sizetape{0.7cm}
-	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+    \edef\sizetape{0.7cm}
+    \tikzstyle{tmtape}=[draw,minimum size=\sizetape]
 
-	%% Draw TM tape
-	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
-	    \node [on chain=1,tmtape] {$s_8$};
-	    \node [on chain=1,tmtape] {$s_9$};
-	    \node [on chain=1,tmtape] {$s_{10}$};
-	    \node [on chain=1,tmtape] {$s_{11}$};
-	\end{scope}
+    %% Draw TM tape
+    \begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+        \node [on chain=1,tmtape] {$s_8$};
+        \node [on chain=1,tmtape] {$s_9$};
+        \node [on chain=1,tmtape] {$s_{10}$};
+        \node [on chain=1,tmtape] {$s_{11}$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -1661,37 +1661,37 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s3) at (-2,-2) {$s_3$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\node[state] (s5) at (3,-2) {$s_5$};
-	\node[state] (s6) at (-3,-3) {$s_6$};
-	\node[state] (s7) at (-1,-3) {$s_7$};
-	\node[state] (s8) at (0,-3) {$s_8$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s0) edge node {} (s2)
-		(s1) edge node {} (s3)
-		(s2) edge node {} (s4)
-		(s2) edge node {} (s5)
-		(s3) edge node {} (s6)
-		(s3) edge node {} (s7)
-		(s4) edge node {} (s8);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s3) at (-2,-2) {$s_3$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \node[state] (s5) at (3,-2) {$s_5$};
+    \node[state] (s6) at (-3,-3) {$s_6$};
+    \node[state] (s7) at (-1,-3) {$s_7$};
+    \node[state] (s8) at (0,-3) {$s_8$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s0) edge node {} (s2)
+        (s1) edge node {} (s3)
+        (s2) edge node {} (s4)
+        (s2) edge node {} (s5)
+        (s3) edge node {} (s6)
+        (s3) edge node {} (s7)
+        (s4) edge node {} (s8);
 
-	\edef\sizetape{0.7cm}
-	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+    \edef\sizetape{0.7cm}
+    \tikzstyle{tmtape}=[draw,minimum size=\sizetape]
 
-	%% Draw TM tape
-	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
-	    \node [on chain=1,tmtape] {$s_9$};
-	    \node [on chain=1,tmtape] {$s_{10}$};
-	    \node [on chain=1,tmtape] {$s_{11}$};
-	    \node [on chain=1,tmtape] {$s_{12}$};
-	    \node [on chain=1,tmtape] {$s_{13}$};
-	\end{scope}
+    %% Draw TM tape
+    \begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+        \node [on chain=1,tmtape] {$s_9$};
+        \node [on chain=1,tmtape] {$s_{10}$};
+        \node [on chain=1,tmtape] {$s_{11}$};
+        \node [on chain=1,tmtape] {$s_{12}$};
+        \node [on chain=1,tmtape] {$s_{13}$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -1700,38 +1700,38 @@ We can use Breadth-First Search\footnote{\url{https://en.wikipedia.org/wiki/Brea
 \frametitle{Using $TM$s to simulate $NTM$s}
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s3) at (-2,-2) {$s_3$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\node[state] (s5) at (3,-2) {$s_5$};
-	\node[state] (s6) at (-3,-3) {$s_6$};
-	\node[state] (s7) at (-1,-3) {$s_7$};
-	\node[state] (s8) at (0,-3) {$s_8$};
-	\node[state, accepting] (s9) at (2,-3) {$s_9$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s0) edge node {} (s2)
-		(s1) edge node {} (s3)
-		(s2) edge node {} (s4)
-		(s2) edge node {} (s5)
-		(s3) edge node {} (s6)
-		(s3) edge node {} (s7)
-		(s4) edge node {} (s8)
-		(s4) edge node {} (s9);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s3) at (-2,-2) {$s_3$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \node[state] (s5) at (3,-2) {$s_5$};
+    \node[state] (s6) at (-3,-3) {$s_6$};
+    \node[state] (s7) at (-1,-3) {$s_7$};
+    \node[state] (s8) at (0,-3) {$s_8$};
+    \node[state, accepting] (s9) at (2,-3) {$s_9$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s0) edge node {} (s2)
+        (s1) edge node {} (s3)
+        (s2) edge node {} (s4)
+        (s2) edge node {} (s5)
+        (s3) edge node {} (s6)
+        (s3) edge node {} (s7)
+        (s4) edge node {} (s8)
+        (s4) edge node {} (s9);
 
-	\edef\sizetape{0.7cm}
-	\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+    \edef\sizetape{0.7cm}
+    \tikzstyle{tmtape}=[draw,minimum size=\sizetape]
 
-	%% Draw TM tape
-	\begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
-	    \node [on chain=1,tmtape] {$s_{10}$};
-	    \node [on chain=1,tmtape] {$s_{11}$};
-	    \node [on chain=1,tmtape] {$s_{12}$};
-	    \node [on chain=1,tmtape] {$s_{13}$};
-	\end{scope}
+    %% Draw TM tape
+    \begin{scope}[shift={(2cm,0cm)},start chain=1 going right,node distance=-0.15mm]
+        \node [on chain=1,tmtape] {$s_{10}$};
+        \node [on chain=1,tmtape] {$s_{11}$};
+        \node [on chain=1,tmtape] {$s_{12}$};
+        \node [on chain=1,tmtape] {$s_{13}$};
+    \end{scope}
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -1787,7 +1787,7 @@ A language $L$ is {\em verifiable} if there exists a machine $V$ such that:
 \frametitle{Structure of part one}
 \begin{itemize}
     \item What is a computer? {\em Deterministic Turing Machine, Nondeterministic Turing Machine}
-    \item What is a problem? {\em Deciding if a word is in a language, verifying that a word is in a language}
+    \item What is a problem? {\em Decidable languages, Verifiable languages}
     \item How do we measure performance?
 \end{itemize}
 \end{frame}
@@ -1817,11 +1817,11 @@ We can represent this time complexity as a function of the size of the input.
 Let $f$ and $g$ be functions over the real numbers. We say that:
 
 \begin{itemize}
-\item<1->$f(n) \in O(g(n)) \text{ iff } \exists c > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, f(n) \leq c \cdot g(n)$
+\item<1->$f(n) \in O(g(n)) \text{ iff } \exists c, n_0 > 0 \text{ s.t. } \forall n \geq n_0, f(n) \leq c \cdot g(n)$
 
-\item<2->$f(n) \in \Omega(g(n)) \text{ iff } \exists c > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, f(n) \geq c \cdot g(n)$
+\item<2->$f(n) \in \Omega(g(n)) \text{ iff } \exists c, n_0 > 0 \text{ s.t. } \forall n \geq n_0, f(n) \geq c \cdot g(n)$
 
-\item<3->$f(n) \in \Theta(g(n)) \text{ iff } \exists c_1, c_2 > 0, n_0 \geq 0 \text{ s.t. } \forall n \geq n_0, c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n)$
+\item<3->$f(n) \in \Theta(g(n)) \text{ iff } \exists c_1, c_2, n_0 > 0 \text{ s.t. } \forall n \geq n_0, c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n)$
 \end{itemize}
 
 We use this notation, called {\em Big-O}, {\em Big-Omega} and {\em Big-Theta}, to simplify our complexity functions by rounding up for upper bounds (Big-O) and down for lower bounds (Big-Omega).
@@ -1840,7 +1840,7 @@ $$n \in \Theta(2n)$$
 \frametitle{Examples}
 We can use the definitions from before to prove each of the following statements:
 
-$$n \in O(n^2): c = 1, n_0 = 0$$
+$$n \in O(n^2): c = 1, n_0 = 1$$
 $$2^n \in \Omega(n^2)$$
 $$n \in \Theta(2n)$$
 \end{frame}
@@ -1849,8 +1849,8 @@ $$n \in \Theta(2n)$$
 \frametitle{Examples}
 We can use the definitions from before to prove each of the following statements:
 
-$$n \in O(n^2): c = 1, n_0 = 0$$
-$$2^n \in \Omega(n^2): c = 1, n_0 = 0$$
+$$n \in O(n^2): c = 1, n_0 = 1$$
+$$2^n \in \Omega(n^2): c = 1, n_0 = 1$$
 $$n \in \Theta(2n)$$
 \end{frame}
 
@@ -1858,9 +1858,16 @@ $$n \in \Theta(2n)$$
 \frametitle{Examples}
 We can use the definitions from before to prove each of the following statements:
 
-$$n \in O(n^2): c = 1, n_0 = 0$$
-$$2^n \in \Omega(n^2): c = 1, n_0 = 0$$
-$$n \in \Theta(2n): c_1 = 0.5, c_2 = 1, n_0 = 0$$
+$$n \in O(n^2): c = 1, n_0 = 1$$
+$$2^n \in \Omega(n^2): c = 1, n_0 = 1$$
+$$n \in \Theta(2n): c_1 = 0.5, c_2 = 1, n_0 = 1$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Simplifying}
+Big-O notation allows us to simplify what would be complicated time complexities into approximate upper bounds.
+
+$$5n^3 + 7n^2 + 28n - 9876 + 5\log^2 n \in O(n^3)$$
 \end{frame}
 
 %------------------------------------------------
@@ -1871,7 +1878,7 @@ $$n \in \Theta(2n): c_1 = 0.5, c_2 = 1, n_0 = 0$$
 \frametitle{Summary of part one}
 \begin{itemize}
     \item What is a computer? {\em Deterministic Turing Machine, Nondeterministic Turing Machine}
-    \item What is a problem? {\em Deciding if a word is in a language, verifying that a word is in a language}
+    \item What is a problem? {\em Decidable languages, Verifiable languages}
     \item How do we measure performance? {\em Upper bound of time for an input of length $n$}
 \end{itemize}
 \end{frame}
@@ -1945,37 +1952,37 @@ We can also define $NP$ as the set of languages that can be verified by a $TM$ i
 Recall the computation tree for an $NTM$.
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s3) at (-2,-2) {$s_3$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\node[state] (s5) at (3,-2) {$s_5$};
-	\node[state] (s6) at (-3,-3) {$s_6$};
-	\node[state] (s7) at (-1,-3) {$s_7$};
-	\node[state] (s8) at (0,-3) {$s_8$};
-	\node[state, accepting] (s9) at (2,-3) {$s_9$};
-	\node[state] (s10) at (3,-3) {$s_{10}$};
-	\node[state] (s11) at (-3,-4) {$s_{11}$};
-	\node[state] (s12) at (-1,-4) {$s_{12}$};
-	\node[state] (s13) at (1,-4) {$s_{13}$};
-	\node[state] (s14) at (3,-4) {$s_{14}$};
-	\path[->]
-		(s0) edge node {} (s1)
-		(s0) edge node {} (s2)
-		(s1) edge node {} (s3)
-		(s2) edge node {} (s4)
-		(s2) edge node {} (s5)
-		(s3) edge node {} (s6)
-		(s3) edge node {} (s7)
-		(s4) edge node {} (s8)
-		(s4) edge node {} (s9)
-		(s5) edge node {} (s10)
-		(s6) edge node {} (s11)
-		(s8) edge node {} (s12)
-		(s8) edge node {} (s13)
-		(s10) edge node {} (s14);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s3) at (-2,-2) {$s_3$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \node[state] (s5) at (3,-2) {$s_5$};
+    \node[state] (s6) at (-3,-3) {$s_6$};
+    \node[state] (s7) at (-1,-3) {$s_7$};
+    \node[state] (s8) at (0,-3) {$s_8$};
+    \node[state, accepting] (s9) at (2,-3) {$s_9$};
+    \node[state] (s10) at (3,-3) {$s_{10}$};
+    \node[state] (s11) at (-3,-4) {$s_{11}$};
+    \node[state] (s12) at (-1,-4) {$s_{12}$};
+    \node[state] (s13) at (1,-4) {$s_{13}$};
+    \node[state] (s14) at (3,-4) {$s_{14}$};
+    \path[->]
+        (s0) edge node {} (s1)
+        (s0) edge node {} (s2)
+        (s1) edge node {} (s3)
+        (s2) edge node {} (s4)
+        (s2) edge node {} (s5)
+        (s3) edge node {} (s6)
+        (s3) edge node {} (s7)
+        (s4) edge node {} (s8)
+        (s4) edge node {} (s9)
+        (s5) edge node {} (s10)
+        (s6) edge node {} (s11)
+        (s8) edge node {} (s12)
+        (s8) edge node {} (s13)
+        (s10) edge node {} (s14);
 \end{tikzpicture}
 \end{center}
 
@@ -1987,37 +1994,37 @@ We label each branch with an integer such that the labels are unique between sib
 Recall the computation tree for an $NTM$.
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s1) at (-2,-1) {$s_1$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s3) at (-2,-2) {$s_3$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\node[state] (s5) at (3,-2) {$s_5$};
-	\node[state] (s6) at (-3,-3) {$s_6$};
-	\node[state] (s7) at (-1,-3) {$s_7$};
-	\node[state] (s8) at (0,-3) {$s_8$};
-	\node[state, accepting] (s9) at (2,-3) {$s_9$};
-	\node[state] (s10) at (3,-3) {$s_{10}$};
-	\node[state] (s11) at (-3,-4) {$s_{11}$};
-	\node[state] (s12) at (-1,-4) {$s_{12}$};
-	\node[state] (s13) at (1,-4) {$s_{13}$};
-	\node[state] (s14) at (3,-4) {$s_{14}$};
-	\path[->]
-		(s0) edge [anchor=north] node {0} (s1)
-		(s0) edge [anchor=north] node {1} (s2)
-		(s1) edge [anchor=east] node {0} (s3)
-		(s2) edge [anchor=east] node {0} (s4)
-		(s2) edge [anchor=east] node {1} (s5)
-		(s3) edge [anchor=east] node {0} (s6)
-		(s3) edge [anchor=east] node {1} (s7)
-		(s4) edge [anchor=east] node {0} (s8)
-		(s4) edge [anchor=east] node {1} (s9)
-		(s5) edge [anchor=east] node {0} (s10)
-		(s6) edge [anchor=east] node {0} (s11)
-		(s8) edge [anchor=east] node {0} (s12)
-		(s8) edge [anchor=east] node {1} (s13)
-		(s10) edge [anchor=east] node {0} (s14);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s1) at (-2,-1) {$s_1$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s3) at (-2,-2) {$s_3$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \node[state] (s5) at (3,-2) {$s_5$};
+    \node[state] (s6) at (-3,-3) {$s_6$};
+    \node[state] (s7) at (-1,-3) {$s_7$};
+    \node[state] (s8) at (0,-3) {$s_8$};
+    \node[state, accepting] (s9) at (2,-3) {$s_9$};
+    \node[state] (s10) at (3,-3) {$s_{10}$};
+    \node[state] (s11) at (-3,-4) {$s_{11}$};
+    \node[state] (s12) at (-1,-4) {$s_{12}$};
+    \node[state] (s13) at (1,-4) {$s_{13}$};
+    \node[state] (s14) at (3,-4) {$s_{14}$};
+    \path[->]
+        (s0) edge [anchor=north] node {0} (s1)
+        (s0) edge [anchor=north] node {1} (s2)
+        (s1) edge [anchor=east] node {0} (s3)
+        (s2) edge [anchor=east] node {0} (s4)
+        (s2) edge [anchor=east] node {1} (s5)
+        (s3) edge [anchor=east] node {0} (s6)
+        (s3) edge [anchor=east] node {1} (s7)
+        (s4) edge [anchor=east] node {0} (s8)
+        (s4) edge [anchor=east] node {1} (s9)
+        (s5) edge [anchor=east] node {0} (s10)
+        (s6) edge [anchor=east] node {0} (s11)
+        (s8) edge [anchor=east] node {0} (s12)
+        (s8) edge [anchor=east] node {1} (s13)
+        (s10) edge [anchor=east] node {0} (s14);
 \end{tikzpicture}
 \end{center}
 
@@ -2029,8 +2036,8 @@ We label each branch with an integer such that the labels are unique between sib
 Our certificate $c$ is now the polynomial length sequence that leads to the accepting state. In this case $c=101$, as can be verified in polynomial time by following the certificate down the tree:
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -2040,11 +2047,11 @@ Our certificate $c$ is now the polynomial length sequence that leads to the acce
 Our certificate $c$ is now the polynomial length sequence that leads to the accepting state. In this case $c=101$, as can be verified in polynomial time by following the certificate down the tree:
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\path[->]
-		(s0) edge [anchor=north] node {1} (s2);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \path[->]
+        (s0) edge [anchor=north] node {1} (s2);
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -2054,13 +2061,13 @@ Our certificate $c$ is now the polynomial length sequence that leads to the acce
 Our certificate $c$ is now the polynomial length sequence that leads to the accepting state. In this case $c=101$, as can be verified in polynomial time by following the certificate down the tree:
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\path[->]
-		(s0) edge [anchor=north] node {1} (s2)
-		(s2) edge [anchor=east] node {0} (s4);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \path[->]
+        (s0) edge [anchor=north] node {1} (s2)
+        (s2) edge [anchor=east] node {0} (s4);
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -2070,15 +2077,15 @@ Our certificate $c$ is now the polynomial length sequence that leads to the acce
 Our certificate $c$ is now the polynomial length sequence that leads to the accepting state. In this case $c=101$, as can be verified in polynomial time by following the certificate down the tree:
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (s0) at (0,0) {$s_0$};
-	\node[state] (s2) at (2,-1) {$s_2$};
-	\node[state] (s4) at (1,-2) {$s_4$};
-	\node[state, accepting] (s9) at (2,-3) {$s_9$};
-	\path[->]
-		(s0) edge [anchor=north] node {1} (s2)
-		(s2) edge [anchor=east] node {0} (s4)
-		(s4) edge [anchor=east] node {1} (s9);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (s0) at (0,0) {$s_0$};
+    \node[state] (s2) at (2,-1) {$s_2$};
+    \node[state] (s4) at (1,-2) {$s_4$};
+    \node[state, accepting] (s9) at (2,-3) {$s_9$};
+    \path[->]
+        (s0) edge [anchor=north] node {1} (s2)
+        (s2) edge [anchor=east] node {0} (s4)
+        (s4) edge [anchor=east] node {1} (s9);
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -2093,11 +2100,11 @@ We use nondeterminism to brute force and verify every certificate of length $k$ 
 \begin{frame}
 \frametitle{From verification to nondeterminism}
 
-The node of the computation tree is the certificate we are verifying at that point.
+The node of the computation tree is the certificate we are verifying at that point. Like last time, $V(w, c)$ accepts if $c = 101$.
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (e) at (0,0) {$\epsilon$};
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (e) at (0,0) {$\epsilon$};
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -2105,16 +2112,16 @@ The node of the computation tree is the certificate we are verifying at that poi
 \begin{frame}[noframenumbering]
 \frametitle{From verification to nondeterminism}
 
-The node of the computation tree is the certificate we are verifying at that point.
+The node of the computation tree is the certificate we are verifying at that point. Like last time, $V(w, c)$ accepts if $c = 101$.
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (e) at (0,0) {$\epsilon$};
-	\node[state] (0) at (-4,-1) {$0$};
-	\node[state] (1) at (4,-1) {$1$};
-	\path[->]
-		(e) edge node {} (0)
-		(e) edge node {} (1);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (e) at (0,0) {$\epsilon$};
+    \node[state] (0) at (-4,-1) {$0$};
+    \node[state] (1) at (4,-1) {$1$};
+    \path[->]
+        (e) edge node {} (0)
+        (e) edge node {} (1);
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -2122,24 +2129,24 @@ The node of the computation tree is the certificate we are verifying at that poi
 \begin{frame}[noframenumbering]
 \frametitle{From verification to nondeterminism}
 
-The node of the computation tree is the certificate we are verifying at that point.
+The node of the computation tree is the certificate we are verifying at that point. Like last time, $V(w, c)$ accepts if $c = 101$.
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (e) at (0,0) {$\epsilon$};
-	\node[state] (0) at (-4,-1) {$0$};
-	\node[state] (1) at (4,-1) {$1$};
-	\node[state] (00) at (-6,-2) {$00$};
-	\node[state] (01) at (-2,-2) {$01$};
-	\node[state] (10) at (2,-2) {$10$};
-	\node[state] (11) at (6,-2) {$11$};
-	\path[->]
-		(e) edge node {} (0)
-		(e) edge node {} (1)
-		(0) edge node {} (00)
-		(0) edge node {} (01)
-		(1) edge node {} (10)
-		(1) edge node {} (11);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (e) at (0,0) {$\epsilon$};
+    \node[state] (0) at (-4,-1) {$0$};
+    \node[state] (1) at (4,-1) {$1$};
+    \node[state] (00) at (-6,-2) {$00$};
+    \node[state] (01) at (-2,-2) {$01$};
+    \node[state] (10) at (2,-2) {$10$};
+    \node[state] (11) at (6,-2) {$11$};
+    \path[->]
+        (e) edge node {} (0)
+        (e) edge node {} (1)
+        (0) edge node {} (00)
+        (0) edge node {} (01)
+        (1) edge node {} (10)
+        (1) edge node {} (11);
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -2147,40 +2154,40 @@ The node of the computation tree is the certificate we are verifying at that poi
 \begin{frame}[noframenumbering]
 \frametitle{From verification to nondeterminism}
 
-The node of the computation tree is the certificate we are verifying at that point.
+The node of the computation tree is the certificate we are verifying at that point. Like last time, $V(w, c)$ accepts if $c = 101$.
 \begin{center}
 \begin{tikzpicture}
-	\tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
-	\node[state] (e) at (0,0) {$\epsilon$};
-	\node[state] (0) at (-4,-1) {$0$};
-	\node[state] (1) at (4,-1) {$1$};
-	\node[state] (00) at (-6,-2) {$00$};
-	\node[state] (01) at (-2,-2) {$01$};
-	\node[state] (10) at (2,-2) {$10$};
-	\node[state] (11) at (6,-2) {$11$};
-	\node[state] (000) at (-7,-3) {$000$};
-	\node[state] (001) at (-5,-3) {$001$};
-	\node[state] (010) at (-3,-3) {$010$};
-	\node[state] (011) at (-1,-3) {$011$};
-	\node[state] (100) at (1,-3) {$100$};
-	\node[state, accepting] (101) at (3,-3) {$101$};
-	\node[state] (110) at (5,-3) {$110$};
-	\node[state] (111) at (7,-3) {$111$};
-	\path[->]
-		(e) edge node {} (0)
-		(e) edge node {} (1)
-		(0) edge node {} (00)
-		(0) edge node {} (01)
-		(1) edge node {} (10)
-		(1) edge node {} (11)
-		(00) edge node {} (000)
-		(00) edge node {} (001)
-		(01) edge node {} (010)
-		(01) edge node {} (011)
-		(10) edge node {} (100)
-		(10) edge node {} (101)
-		(11) edge node {} (110)
-		(11) edge node {} (111);
+    \tikzset{state/.append style={inner sep=1pt,minimum size=0pt}}
+    \node[state] (e) at (0,0) {$\epsilon$};
+    \node[state] (0) at (-4,-1) {$0$};
+    \node[state] (1) at (4,-1) {$1$};
+    \node[state] (00) at (-6,-2) {$00$};
+    \node[state] (01) at (-2,-2) {$01$};
+    \node[state] (10) at (2,-2) {$10$};
+    \node[state] (11) at (6,-2) {$11$};
+    \node[state] (000) at (-7,-3) {$000$};
+    \node[state] (001) at (-5,-3) {$001$};
+    \node[state] (010) at (-3,-3) {$010$};
+    \node[state] (011) at (-1,-3) {$011$};
+    \node[state] (100) at (1,-3) {$100$};
+    \node[state, accepting] (101) at (3,-3) {$101$};
+    \node[state] (110) at (5,-3) {$110$};
+    \node[state] (111) at (7,-3) {$111$};
+    \path[->]
+        (e) edge node {} (0)
+        (e) edge node {} (1)
+        (0) edge node {} (00)
+        (0) edge node {} (01)
+        (1) edge node {} (10)
+        (1) edge node {} (11)
+        (00) edge node {} (000)
+        (00) edge node {} (001)
+        (01) edge node {} (010)
+        (01) edge node {} (011)
+        (10) edge node {} (100)
+        (10) edge node {} (101)
+        (11) edge node {} (110)
+        (11) edge node {} (111);
 \end{tikzpicture}
 \end{center}
 \end{frame}
@@ -2291,7 +2298,7 @@ If one $NP\text{-Complete}$ language is proven to be in $P$, then every $NP$ pro
 
 \begin{frame}
 \frametitle{Problem: There are lots of $NP$ problems}
-There are an infinite number of $NP$ problems, so it is impossible to provide a reduction to each individual problem.
+It is very difficult if not impossible to provide a reduction to each individual problem.
 %Note: Said claim might not be true if you are Jeff Dean, see https://www.quora.com/What-are-all-the-Jeff-Dean-facts
 %Note: If you are Jeff Dean, can I have an autograph?
 
@@ -2573,14 +2580,18 @@ $$L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE = NPSPACE = P_{CTC} \
 \begin{frame}
 \frametitle{Proofs for $NP\text{-Complete}$ problems}
 \begin{itemize}
-	\item Takayuki Yato and Takahiro Seta: Complexity and Completeness of Finding Another Solution and Its Application to Puzzles, IEICE TRANSACTIONS on Fundamentals of Electronics, Communications and Computer Sciences, Vol.E86-A, No.5, pp.1052-1060
-	\item  Erik D. Demaine, Susan Hohenberger and David Liben-Nowell: Tetris is Hard, Even to Approximate, \url{http://arxiv.org/abs/cs/0210020}
+    \item Takayuki Yato and Takahiro Seta: Complexity and Completeness of Finding Another Solution and Its Application to Puzzles, IEICE TRANSACTIONS on Fundamentals of Electronics, Communications and Computer Sciences, Vol.E86-A, No.5, pp.1052-1060
+    \item  Erik D. Demaine, Susan Hohenberger and David Liben-Nowell: Tetris is Hard, Even to Approximate, \url{http://arxiv.org/abs/cs/0210020}
     \item Graham Cormode: The Hardness of the Lemmings Game, or Oh no, more NP-Completeness Proofs, Proceedings of the 3rd International Conference on Fun with Algorithms, May 2004, pages 65-76
     \item Greg Aloupis, Erik D. Demaine, Alan Guo and Giovanni Viglietta: Classic Nintendo Games are (Computationally) Hard, \url{http://arxiv.org/abs/1203.1895}
     \item Luciano Gualà, Stefano Leucci and Emanuele Natale: Bejeweled, Candy Crush and other Match-Three Games are (NP-)Hard, \url{http://arxiv.org/abs/1403.5830}
     \item Rapha\"{e}l Clifford, Markus Jalsenius, Ashley Montanaro and Benjamin Sach:  The Complexity of Flood Filling Games, \url{http://arxiv.org/abs/1001.4420}
 \end{itemize}
 \end{frame}
+
+%------------------------------------------------
+\section{Post-credits}
+%------------------------------------------------
 
 \begin{frame}
 \frametitle{Post-credits}
